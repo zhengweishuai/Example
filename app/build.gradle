@@ -1,17 +1,50 @@
 apply plugin: 'com.android.application'
 android {
-    compileSdkVersion 28
+    compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "com.example.edz.myapplication"
-        minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+        flavorDimensions "versionCode"
+        multiDexEnabled true
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
+        ndk {
+            //设置支持的SO库架构
+            abiFilters 'armeabi' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }
+    }
+    signingConfigs {
+        debug {
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWORD
+            storeFile file("file://" + project.rootDir.absolutePath + "/keystore/weis.jks")
+            storePassword RELEASE_STORE_PASSWORD
+        }
+        release {
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWORD
+            storeFile file("file://" + project.rootDir.absolutePath + "/keystore/weis.jks")
+            storePassword RELEASE_STORE_PASSWORD
+        }
     }
     buildTypes {
         release {
+            minifyEnabled true
+            zipAlignEnabled true // Zipalign优化
+            shrinkResources true // 移除无用的resource文件
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
             minifyEnabled false
+            zipAlignEnabled false // Zipalign优化
+            shrinkResources false  // 移除无用的resource文件
+            signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -25,14 +58,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation 'skin.support:skin-support:3.1.1'                   // skin-support basic widget
-    implementation 'skin.support:skin-support-design:3.1.1'
-    // skin-support-design material design support [selectable]
-    implementation 'skin.support:skin-support-cardview:3.1.1'
-    // skin-support-cardview CardView support [selectable]
-    implementation 'skin.support:skin-support-constraint-layout:3.1.1'
-    // skin-support-constraint-layout ConstraintLayout support [selectable]
-
     // 添加下面的内容
     implementation(name: 'alipaySdk-15.5.9-20181123210657', ext: 'aar')
+    implementation 'com.tencent.bugly:crashreport_upgrade:latest.release'//其中latest.release指代最新版本号，也可以指定明确的版本号，例如1.2.0
+    implementation 'com.tencent.bugly:nativecrashreport:latest.release' //其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.2.0
 }

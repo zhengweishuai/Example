@@ -8,15 +8,16 @@
 
     <Button
         android:id="@+id/pay"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="支付" />
 
     <Button
         android:id="@+id/ui"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/pay"
+        android:textColor="@color/color_2c2c2c"
         android:text="UI" />
 
 </RelativeLayout>

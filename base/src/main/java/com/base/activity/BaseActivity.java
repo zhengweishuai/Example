@@ -17,7 +17,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.RelativeLayout;
 
 import com.base.R;
-import com.base.application.App;
+import com.base.application.BaseApp;
 import com.base.fragment.BaseFragment;
 import com.base.listener.BaseListener;
 import com.base.mvp.IPresenter;
@@ -41,7 +41,7 @@ public abstract class BaseActivity<Presenter extends IPresenter> extends RxAppCo
     private FragmentManager manager;
 
     //application
-    private App application = null;
+    protected BaseApp application = null;
     private Context mContext = null;
     /**
      * 当前Activity渲染的视图View
@@ -71,7 +71,7 @@ public abstract class BaseActivity<Presenter extends IPresenter> extends RxAppCo
         //设置数据
         initData();
         //application
-        application = (App) getApplication();
+        application = (BaseApp) getApplication();
         mContext = this;
         addActivity();
     }
@@ -100,7 +100,7 @@ public abstract class BaseActivity<Presenter extends IPresenter> extends RxAppCo
          * 所有页面默认显示白色状态栏的方法：
          * 状态栏通过ImmersionBar隐藏，为父布局设置与状态栏同等高度的padding、并设置白色背景；
          */
-        rootLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.color_ffffff));
+        rootLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.white));
         int top = DensityUtil.getStateBar(this);
         rootLayout.setPadding(0, top, 0, 0);
         return rootLayout;
@@ -187,6 +187,7 @@ public abstract class BaseActivity<Presenter extends IPresenter> extends RxAppCo
             presenter.detachView();
         }
         ImmersionBar.with(this).destroy(); //必须调用该方法，防止内存泄漏
+        application.removeActivity(this);
     }
 
     @Override

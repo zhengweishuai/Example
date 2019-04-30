@@ -1,6 +1,8 @@
 package com.example.edz.ui;
 
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.support.v7.app.AppCompatDelegate;
 import android.view.View;
 
 import com.base.activity.BaseActivity;
@@ -28,7 +30,7 @@ public class MainActivity extends BaseActivity {
         findViewById(R.id.pay).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(MainActivity.this, AliPayActivity.class);
+                intent = new Intent(MainActivity.this, UIActivity.class);
                 startActivity(intent);
             }
         });
