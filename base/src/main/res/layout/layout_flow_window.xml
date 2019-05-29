@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.base.widget.MLinearlayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical">
+
+    <RelativeLayout
+        android:id="@+id/cover_layout"
+        android:layout_width="@dimen/dd_dimen_80px"
+        android:layout_height="@dimen/dd_dimen_80px">
+
+        <com.base.widget.RoundProgress
+            android:id="@+id/audio_progress"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            app:srp_progressColor="@color/color_3cc051"
+            app:srp_roundColor="@color/color_f7f7f7"
+            app:srp_roundWidth="@dimen/dd_dimen_5px"
+            app:srp_startAngle="270"
+            app:srp_style="STROKE" />
+
+        <com.widget.CircleImageView
+            android:id="@+id/book_cover"
+            android:layout_width="@dimen/dd_dimen_70px"
+            android:layout_height="@dimen/dd_dimen_70px"
+            android:layout_centerInParent="true" />
+
+        <com.widget.CircleImageView
+            android:layout_width="@dimen/dd_dimen_20px"
+            android:layout_height="@dimen/dd_dimen_20px"
+            android:layout_centerInParent="true"
+            android:src="@color/white" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/media_option"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dd_dimen_80px"
+        android:layout_marginLeft="@dimen/dd_dimen_22px"
+        android:layout_toRightOf="@+id/cover_layout"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"></LinearLayout>
+</com.base.widget.MLinearlayout>

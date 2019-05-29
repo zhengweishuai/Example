@@ -1,6 +1,5 @@
 package com.base.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
@@ -73,7 +72,6 @@ public abstract class BaseActivity<Presenter extends IPresenter> extends RxAppCo
         //application
         application = (BaseApp) getApplication();
         mContext = this;
-        addActivity();
     }
 
 
@@ -187,7 +185,6 @@ public abstract class BaseActivity<Presenter extends IPresenter> extends RxAppCo
             presenter.detachView();
         }
         ImmersionBar.with(this).destroy(); //必须调用该方法，防止内存泄漏
-        application.removeActivity(this);
     }
 
     @Override
@@ -236,18 +233,6 @@ public abstract class BaseActivity<Presenter extends IPresenter> extends RxAppCo
         ft.replace(containerId, fragment, tag);
         ft.commitAllowingStateLoss();
         return (T) fragment;
-    }
-
-    // 添加Activity方法
-    public void addActivity() {
-        application.addActivity((Activity) mContext);
-    }
-
-    /**
-     * 销毁所有的Activity
-     */
-    public void removeALLActivity() {
-        application.removeALLActivity();
     }
 
     /**

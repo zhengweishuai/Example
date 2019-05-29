@@ -5,13 +5,11 @@ buildscript {
     repositories {
         google()
         jcenter()
-        // 添加下面的内容
-        flatDir {
-            dirs 'libs'
-        }
+        mavenCentral()
+        maven { url 'https://maven.google.com' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'com.android.tools.build:gradle:3.4.1'
     }
 }
 
@@ -19,11 +17,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-        mavenCentral()
-        // 添加下面的内容
-        flatDir {
-            dirs 'libs'
-        }
+        maven { url 'https://jitpack.io' }//添加jitpack仓库地址
     }
 }
 

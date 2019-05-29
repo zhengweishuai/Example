@@ -1,45 +1,28 @@
 package com.example.edz.ui;
 
-import android.content.Intent;
-import android.content.res.Configuration;
-import android.support.v7.app.AppCompatDelegate;
-import android.view.View;
+import android.app.Activity;
+import android.databinding.DataBindingUtil;
+import android.os.Bundle;
 
-import com.base.activity.BaseActivity;
 import com.example.edz.application.R;
+import com.example.edz.application.databinding.ActivityMainBinding;
+import com.example.edz.bean.Song;
+import com.example.edz.bean.User;
 
-public class MainActivity extends BaseActivity {
-    private Intent intent;
-
-    @Override
-    protected void initParms() {
-    }
-
-    @Override
-    protected int initLayout() {
-        return R.layout.activity_main;
-    }
+public class MainActivity extends Activity {
+    ActivityMainBinding binding;
 
     @Override
-    protected void initView() {
-
-    }
-
-    @Override
-    protected void initData() {
-        findViewById(R.id.pay).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent = new Intent(MainActivity.this, UIActivity.class);
-                startActivity(intent);
-            }
-        });
-        findViewById(R.id.ui).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent = new Intent(MainActivity.this, UIActivity.class);
-                startActivity(intent);
-            }
-        });
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        User user = new User();
+        user.setName("梨花");
+        user.setAge("28");
+        Song song = new Song();
+        song.title.set("你的背包");
+        song.time.set("陈奕迅");
+        binding.setMainData(user);
+        binding.setSong(song);
     }
 }

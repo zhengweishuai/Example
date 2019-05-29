@@ -1,23 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context="com.example.edz.ui.MainActivity">
+<layout xmlns:tools="http://schemas.android.com/tools">
 
-    <Button
-        android:id="@+id/pay"
+    <data>
+
+        <variable
+            name="mainData"
+            type="com.example.edz.bean.User" />
+
+        <variable
+            name="song"
+            type="com.example.edz.bean.Song" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/main_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="支付" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.example.edz.ui.MainActivity">
 
-    <Button
-        android:id="@+id/ui"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/pay"
-        android:textColor="@color/color_2c2c2c"
-        android:text="UI" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{`姓名` + mainData.name + `，年龄` + mainData.age}" />
 
-</RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{`歌曲名` + song.title.get()  + `，歌手` + song.time.get()}" />
+    </LinearLayout>
+</layout>
