@@ -5,7 +5,7 @@
     android:clickable="true"
     android:orientation="vertical">
 
-    <com.base.widget.SlackLoadingView
+    <com.widget.loading.SlackLoadingView
         android:id="@+id/animation_view"
         android:layout_width="@dimen/dd_dimen_205px"
         android:layout_height="@dimen/dd_dimen_205px"
