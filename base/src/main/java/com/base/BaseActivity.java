@@ -15,15 +15,14 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.RelativeLayout;
 
+import com.gyf.barlibrary.ImmersionBar;
 import com.mvp.IBasePresenter;
 import com.mvp.IBaseView;
-import com.BaseApp;
+import com.trello.rxlifecycle.LifecycleTransformer;
+import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.utils.DensityUtil;
 import com.widget.loading.SlackLoadingView;
 import com.widget.toast.ToastUtils;
-import com.gyf.barlibrary.ImmersionBar;
-import com.trello.rxlifecycle.LifecycleTransformer;
-import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -34,8 +33,6 @@ public abstract class BaseActivity<P extends IBasePresenter> extends RxAppCompat
     private int activityOpenEnterAnimation;
     private int activityOpenExitAnimation;
     private FragmentManager manager;
-    //application
-    protected BaseApp application = null;
     //当前Activity渲染的视图View
     protected View mContextView = null;
     protected RelativeLayout rootLayout;
@@ -59,8 +56,6 @@ public abstract class BaseActivity<P extends IBasePresenter> extends RxAppCompat
         initParms();
         initView();
         doBusiness();
-        //application
-        application = (BaseApp) getApplication();
     }
 
     /**
