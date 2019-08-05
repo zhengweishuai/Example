@@ -5,6 +5,12 @@
     android:clickable="true"
     android:orientation="vertical">
 
+    <ImageView
+        android:layout_width="@dimen/dd_dimen_235px"
+        android:layout_height="@dimen/dd_dimen_235px"
+        android:layout_centerInParent="true"
+        android:background="@mipmap/loading_bg" />
+
     <com.widget.loading.SlackLoadingView
         android:id="@+id/animation_view"
         android:layout_width="@dimen/dd_dimen_205px"

@@ -18,7 +18,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
 
     @Override
     protected int initLayout() {
-        return R.layout.activity_main;
+        return R.layout.activity_login;
     }
 
     @Override
@@ -43,7 +43,14 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
 
     @OnClick(R.id.login)
     public void onViewClicked() {
-        getPresenter().login(name.getText().toString(), pwd.getText().toString());
+        showLoading(true);
+//        getPresenter().login(name.getText().toString(), pwd.getText().toString());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (isShowLoading()) showLoading(false);
     }
 
     @Override

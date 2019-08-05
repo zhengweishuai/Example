@@ -32,24 +32,24 @@ public abstract class BaseActivity<P extends IBasePresenter> extends RxAppCompat
     private int activityCloseExitAnimation;
     private int activityOpenEnterAnimation;
     private int activityOpenExitAnimation;
-    private FragmentManager manager;
-    //当前Activity渲染的视图View
-    protected View mContextView = null;
+    //根视图
     protected RelativeLayout rootLayout;
+    //进度框
     protected View loadingView;
     private Unbinder bind;
     private P presenter;
+    //用来记录loading是否在加载
     private int loadingCount = 0;
-
+    //沉浸式状态栏管理
+    protected ImmersionBar immersionBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         obtainTheme();
         super.onCreate(savedInstanceState);
-        manager = getSupportFragmentManager();
         //初始化沉浸式状态栏
         initTitleBar();
-        mContextView = LayoutInflater.from(this).inflate(initLayout(), null);
+        View mContextView = LayoutInflater.from(this).inflate(initLayout(), null);
         setContentView(generateContentView(mContextView));
         //绑定控件
         bind = ButterKnife.bind(this);
@@ -84,7 +84,6 @@ public abstract class BaseActivity<P extends IBasePresenter> extends RxAppCompat
      */
     public abstract P onBindPresenter();
 
-
     /**
      * 获取 Presenter 对象，在需要获取时才创建Presenter，起到懒加载作用
      */
@@ -111,7 +110,7 @@ public abstract class BaseActivity<P extends IBasePresenter> extends RxAppCompat
         if (presenter != null) {
             presenter.detachView();
         }
-        ImmersionBar.with(this).destroy(); //必须调用该方法，防止内存泄漏
+        immersionBar.destroy(); //必须调用该方法，防止内存泄漏
     }
 
     /**
@@ -136,7 +135,7 @@ public abstract class BaseActivity<P extends IBasePresenter> extends RxAppCompat
      * 初始化沉浸式状态栏
      */
     protected void initTitleBar() {
-        ImmersionBar immersionBar = ImmersionBar.with(this);
+        immersionBar = ImmersionBar.with(this);
         if (ImmersionBar.isSupportStatusBarDarkFont()) {//是否支持修改状态栏字体颜色
             immersionBar.statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色
                     .flymeOSStatusBarFontColor(R.color.color_2c2c2c)  //修改flyme OS状态栏字体颜色
@@ -216,6 +215,7 @@ public abstract class BaseActivity<P extends IBasePresenter> extends RxAppCompat
         if (this.isFinishing()) {
             return null;
         }
+        FragmentManager manager = getSupportFragmentManager();
         BaseFragment fragment = null;
         FragmentTransaction ft = manager.beginTransaction();
 
@@ -286,8 +286,8 @@ public abstract class BaseActivity<P extends IBasePresenter> extends RxAppCompat
                 loadingCount--;
                 if (loadingCount <= 0) {
                     if (loadingView != null) {
-                        rootLayout.removeView(loadingView);
                         onLoadingViewRemoved(loadingView);
+                        rootLayout.removeView(loadingView);
                     }
                     loadingCount = 0;
                 }
@@ -298,8 +298,7 @@ public abstract class BaseActivity<P extends IBasePresenter> extends RxAppCompat
     protected void onLoadingViewRemoved(View loadingView) {
         SlackLoadingView view = loadingView.findViewById(R.id.animation_view);
         if (view != null) {
-
-            view.start();
+            view.destory();
         }
     }
 

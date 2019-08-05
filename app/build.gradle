@@ -57,4 +57,7 @@ dependencies {
     implementation "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknife"
+//    implementation "androidx.fragment:fragment:1.0.0"
+//    implementation "androidx.lifecycle:lifecycle-viewmodel:2.0.0"
+//    implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
 }

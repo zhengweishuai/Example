@@ -11,6 +11,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 
+import com.utils.DensityUtil;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -25,9 +27,9 @@ public class SlackLoadingView extends View {
     //加载状态
     private final int STATUS_LOADING = 1;
     //线条最大长度
-    private final int MAX_LINE_LENGTH = dp2px(getContext(), 80);
+    private final int MAX_LINE_LENGTH = DensityUtil.dip2px(getContext(), 80);
     //线条最短长度
-    private final int MIN_LINE_LENGTH = dp2px(getContext(), 20);
+    private final int MIN_LINE_LENGTH = DensityUtil.dip2px(getContext(), 20);
     //最大间隔时长
     private final int MAX_DURATION = 3000;
     //最小间隔时长
@@ -283,7 +285,7 @@ public class SlackLoadingView extends View {
      * 线条变化动画
      */
     private void startLCAnim() {
-        ValueAnimator lineWidthAnim = ValueAnimator.ofFloat(mEntireLineLength - dp2px(getContext(), 1), -mEntireLineLength);
+        ValueAnimator lineWidthAnim = ValueAnimator.ofFloat(mEntireLineLength - DensityUtil.dip2px(getContext(), 1), -mEntireLineLength);
         lineWidthAnim.setDuration(mDuration);
         lineWidthAnim.setInterpolator(new LinearInterpolator());
         lineWidthAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -322,6 +324,9 @@ public class SlackLoadingView extends View {
             mAnimList.clear();
             mStatus = STATUS_LOADING;
             startCRLCAnim();
+//            startCRAnim();
+//            startCRCCAnim();
+//            startLCAnim();
         }
     }
 
@@ -336,9 +341,13 @@ public class SlackLoadingView extends View {
         invalidate();
     }
 
-    private int dp2px(Context context, float dp) {
-        final float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (dp * scale + 0.5f);
+    public void destory() {
+        mAnimList.clear();
+        if (mStatus == STATUS_LOADING) {
+            mStatus = STATUS_STILL;
+            for (Animator anim : mAnimList) {
+                anim.cancel();
+            }
+        }
     }
-
 }
