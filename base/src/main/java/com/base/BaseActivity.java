@@ -1,6 +1,5 @@
 package com.base;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
@@ -17,9 +16,7 @@ import android.widget.RelativeLayout;
 
 import com.gyf.barlibrary.ImmersionBar;
 import com.mvp.IBasePresenter;
-import com.mvp.IBaseView;
-import com.trello.rxlifecycle.LifecycleTransformer;
-import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import com.utils.DensityUtil;
 import com.widget.loading.SlackLoadingView;
 import com.widget.toast.ToastUtils;
@@ -27,7 +24,7 @@ import com.widget.toast.ToastUtils;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public abstract class BaseActivity<P extends IBasePresenter> extends RxAppCompatActivity implements IBaseView {
+public abstract class BaseActivity<P extends IBasePresenter> extends RxAppCompatActivity {
     private int activityCloseEnterAnimation;
     private int activityCloseExitAnimation;
     private int activityOpenEnterAnimation;
@@ -48,7 +45,7 @@ public abstract class BaseActivity<P extends IBasePresenter> extends RxAppCompat
         obtainTheme();
         super.onCreate(savedInstanceState);
         //初始化沉浸式状态栏
-        initTitleBar();
+        initStateBar();
         View mContextView = LayoutInflater.from(this).inflate(initLayout(), null);
         setContentView(generateContentView(mContextView));
         //绑定控件
@@ -95,15 +92,6 @@ public abstract class BaseActivity<P extends IBasePresenter> extends RxAppCompat
     }
 
     @Override
-    public Activity getSelfActivity() {
-        return this;
-    }
-
-    public <T> LifecycleTransformer<T> bindToLife() {
-        return this.<T>bindToLifecycle();
-    }
-
-    @Override
     protected void onDestroy() {
         super.onDestroy();
         bind.unbind();
@@ -127,14 +115,14 @@ public abstract class BaseActivity<P extends IBasePresenter> extends RxAppCompat
     /**
      * 隐藏状态栏
      */
-    protected void hintTitleBar() {
+    protected void hintStateBar() {
         rootLayout.setPadding(0, 0, 0, 0);
     }
 
     /**
      * 初始化沉浸式状态栏
      */
-    protected void initTitleBar() {
+    protected void initStateBar() {
         immersionBar = ImmersionBar.with(this);
         if (ImmersionBar.isSupportStatusBarDarkFont()) {//是否支持修改状态栏字体颜色
             immersionBar.statusBarDarkFont(true)   //状态栏字体是深色，不写默认为亮色

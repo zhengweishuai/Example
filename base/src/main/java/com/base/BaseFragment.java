@@ -1,6 +1,5 @@
 package com.base;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -8,15 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mvp.IBasePresenter;
-import com.mvp.IBaseView;
-import com.trello.rxlifecycle.LifecycleTransformer;
-import com.trello.rxlifecycle.components.support.RxFragment;
+import com.trello.rxlifecycle2.components.support.RxFragment;
 import com.widget.toast.ToastUtils;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public abstract class BaseFragment<P extends IBasePresenter> extends RxFragment implements IBaseView {
+public abstract class BaseFragment<P extends IBasePresenter> extends RxFragment{
 
     //view
     private View mRootView;
@@ -93,15 +90,6 @@ public abstract class BaseFragment<P extends IBasePresenter> extends RxFragment 
             presenter = onBindPresenter();
         }
         return presenter;
-    }
-
-    public <T> LifecycleTransformer<T> bindToLife() {
-        return this.<T>bindToLifecycle();
-    }
-
-    @Override
-    public Activity getSelfActivity() {
-        return getActivity();
     }
 
     public void toast(String msg) {

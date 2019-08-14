@@ -6,7 +6,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 
+import com.base.BuildConfig;
+import com.http.ApiHelper;
 import com.utils.DensityUtil;
+import com.utils.LogUtil;
 import com.utils.SPUtils;
 import com.widget.FloatWindow;
 import com.widget.toast.ToastUtils;
@@ -25,7 +28,12 @@ public class BaseApp extends Application {
         super.onCreate();
         //SharedPreferences
         SPUtils.init(this);
+        //toast
         ToastUtils.init(this);
+        //log
+        LogUtil.init(BuildConfig.IS_DEBUG);
+        //网络请求
+        ApiHelper.init();
         registerActivityLifeCallback();
     }
 
