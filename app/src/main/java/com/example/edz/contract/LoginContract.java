@@ -1,6 +1,5 @@
 package com.example.edz.contract;
 
-import com.example.edz.listener.HttpResponseListener;
 import com.mvp.IBasePresenter;
 import com.mvp.IBaseView;
 
@@ -26,12 +25,5 @@ public class LoginContract {
      */
     public interface LoginPtr extends IBasePresenter {
         void login(String username, String password);
-    }
-
-    /**
-     * model 层接口
-     */
-    public interface LoginMdl {
-        void login(String username, String password, HttpResponseListener callbak);
     }
 }

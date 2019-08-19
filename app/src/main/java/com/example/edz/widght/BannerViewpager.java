@@ -6,8 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 
-import java.lang.reflect.Field;
-
 /**
  * created by zhengweis on 2019/8/12.
  * description：

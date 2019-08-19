@@ -139,15 +139,8 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        if (isShowLoading()) showLoading(false);
-    }
-
-    @Override
     public void loginSuccess(String msg) {
         startActivity(new Intent(this, MainActivity.class));
-//        toast(msg);
     }
 
     @Override

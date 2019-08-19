@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 
 import com.trello.rxlifecycle2.android.ActivityEvent;
+import com.trello.rxlifecycle2.android.FragmentEvent;
 import com.trello.rxlifecycle2.components.RxActivity;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import com.trello.rxlifecycle2.components.support.RxFragment;
@@ -33,7 +34,7 @@ public class RxHelper {
 
     public static <T> ObservableTransformer<T, T> observableIO2Main(final RxFragment fragment) {
         return upstream -> upstream.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).compose(fragment.<T>bindToLifecycle());
+                .observeOn(AndroidSchedulers.mainThread()).compose(fragment.<T>bindUntilEvent(FragmentEvent.DESTROY_VIEW));
     }
 
     public static <T> FlowableTransformer<T, T> flowableIO2Main() {
