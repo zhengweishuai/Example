@@ -16,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * description：
  */
 public class ApiHelper {
-    public static IApi iApi;
+    static IApi iApi;
 
     private ApiHelper() {
         throw new AssertionError();

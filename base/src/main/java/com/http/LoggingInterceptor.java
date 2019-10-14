@@ -20,9 +20,9 @@ public class LoggingInterceptor implements Interceptor {
         LogUtil.d("request:" + request.toString());
         long t1 = System.nanoTime();
         okhttp3.Response response = chain.proceed(chain.request());
-        long t2 = System.nanoTime();
-        LogUtil.d(String.format(Locale.getDefault(), "Received response for %s in %.1fms%n%s",
-                response.request().url(), (t2 - t1) / 1e6d, response.headers()));
+//        long t2 = System.nanoTime();
+//        LogUtil.d(String.format(Locale.getDefault(), "Received response for %s in %.1fms%n%s",
+//                response.request().url(), (t2 - t1) / 1e6d, response.headers()));
         okhttp3.MediaType mediaType = response.body().contentType();
         String content = response.body().string();
         LogUtil.json(content);
