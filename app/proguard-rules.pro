@@ -24,7 +24,7 @@
 -keep public class * extends android.preference.Preference
 -keep public class * extends android.view.View
 -keep public class com.android.vending.licensing.ILicensingService
--keep class android.support.** {*;}
+-keep cl ass android.support.** {*;}
 
 -keepclasseswithmembernames class * {
     native <methods>;

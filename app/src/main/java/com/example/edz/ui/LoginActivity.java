@@ -1,15 +1,19 @@
 package com.example.edz.ui;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapRegionDecoder;
 import android.graphics.Rect;
+import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 
 import com.base.BaseActivity;
 import com.example.edz.application.R;
 import com.example.edz.contract.LoginContract;
+import com.example.edz.pattern.observer.IObserver;
+import com.example.edz.pattern.observer.SubjectManager;
 import com.example.edz.presenter.LoginPresenter;
 import com.example.edz.widght.BigImageView;
 import com.utils.LogUtil;
@@ -18,8 +22,10 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class LoginActivity extends BaseActivity<LoginPresenter> implements LoginContract.LoginUi {
+public class LoginActivity extends BaseActivity<LoginPresenter> implements LoginContract.LoginUi, IObserver {
 
     @BindView(R.id.img_1)
     ImageView img1;
@@ -47,7 +53,6 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
 
     @Override
     protected void doBusiness() {
-
         try {
             InputStream inputStream = getAssets().open("qmsht.jpg");
             img2.setImageBitmap(BitmapFactory.decodeStream(inputStream));
@@ -70,6 +75,8 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
             e.printStackTrace();
         }
 
+
+        SubjectManager.newInstance().attach(this);
     }
 
     @Override
@@ -86,5 +93,23 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     @Override
     public void loginFaild(String msg) {
 
+    }
+
+    @Override
+    public void onEvent(Object object) {
+        LogUtil.d(object.toString() + LoginActivity.class.getSimpleName());
+    }
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
+
+    @OnClick(R.id.img_2)
+    public void onViewClicked() {
+        startActivity(new Intent(this, MainActivity.class));
     }
 }

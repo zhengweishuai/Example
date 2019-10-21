@@ -31,12 +31,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.edz.ui.MainActivity" />
 
         <!--高度地图-->
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="078c239bf97206e3990128a1bf28f634" />
+        <activity android:name="com.example.edz.ui.MainActivity" />
+
+        <activity android:name="com.example.edz.ui.EventActivity"/>
     </application>
 
 </manifest>
