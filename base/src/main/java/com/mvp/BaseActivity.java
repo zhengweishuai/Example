@@ -1,22 +1,23 @@
-package com.base;
+package com.mvp;
 
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.RelativeLayout;
 
+import androidx.annotation.LayoutRes;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.base.R;
 import com.gyf.barlibrary.ImmersionBar;
-import com.mvp.IBasePresenter;
-import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import com.utils.DensityUtil;
 import com.widget.loading.SlackLoadingView;
 import com.widget.toast.ToastUtils;
@@ -24,7 +25,7 @@ import com.widget.toast.ToastUtils;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public abstract class BaseActivity<P extends IBasePresenter> extends RxAppCompatActivity {
+public abstract class BaseActivity<P extends IBasePresenter> extends AppCompatActivity {
     private int activityCloseEnterAnimation;
     private int activityCloseExitAnimation;
     private int activityOpenEnterAnimation;

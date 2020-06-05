@@ -1,19 +1,20 @@
-package com.base;
+package com.mvp;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.mvp.IBasePresenter;
-import com.trello.rxlifecycle2.components.support.RxFragment;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import com.widget.toast.ToastUtils;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public abstract class BaseFragment<P extends IBasePresenter> extends RxFragment{
+public abstract class BaseFragment<P extends IBasePresenter> extends Fragment {
 
     //view
     private View mRootView;
@@ -31,10 +32,15 @@ public abstract class BaseFragment<P extends IBasePresenter> extends RxFragment{
         if (mRootView == null) {
             mRootView = inflater.inflate(attachLayoutRes(), container, false);
             bind = ButterKnife.bind(this, mRootView);
-            initViews();
-            doBusiness();
         }
         return mRootView;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initViews(view);
+        doBusiness();
     }
 
     @Override
@@ -63,8 +69,9 @@ public abstract class BaseFragment<P extends IBasePresenter> extends RxFragment{
 
     /**
      * 初始化视图控件
+     * @param mRootView
      */
-    protected abstract void initViews();
+    protected abstract void initViews(View mRootView);
 
     /**
      * 处理业务
