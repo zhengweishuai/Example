@@ -3,7 +3,7 @@ package com.http;
 
 import android.content.Context;
 
-import com.base.BaseActivity;
+import com.mvp.BaseMvpActivity;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
@@ -46,8 +46,8 @@ public abstract class ApiCallBack<T> implements Observer<BaseResponse<T>> {
     }
 
     private void showLoading(boolean show) {
-        if (context instanceof BaseActivity) {
-            ((BaseActivity) context).showLoading(show);
+        if (context instanceof BaseMvpActivity) {
+            ((BaseMvpActivity) context).showLoading(show);
         }
     }
 

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/main_selector_navi_home"
+        android:title="首页" />
+
+    <item
+        android:id="@+id/dicover"
+        android:icon="@drawable/main_selector_navi_discover"
+        android:title="发现" />
+
+    <item
+        android:id="@+id/user"
+        android:icon="@drawable/main_selector_navi_user"
+        android:title="我的" />
+</menu>

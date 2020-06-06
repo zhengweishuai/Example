@@ -47,7 +47,7 @@ public class ApiHelper {
 
     public static void getRecommendAuthors(Context context, ApiCallBack<Object> observer) {
         iApi.getRecommendAuthors(100, 1, 5, "e7534d4511c7ae46f3d538347ef7a469")
-                .compose(RxHelper.observableIO2Main(context))
+
                 .subscribe(observer);
     }
 

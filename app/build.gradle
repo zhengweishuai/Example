@@ -1,6 +1,12 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'kotlin-android'
+apply plugin:'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 android {
+    dataBinding{
+        enabled = true
+    }
+
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
@@ -58,17 +64,9 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':base')
-    implementation "com.android.support:appcompat-v7:$rootProject.ext.supportVersion"
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintlayout"
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknife"
-//    implementation "androidx.fragment:fragment:1.0.0"
-//    implementation "androidx.lifecycle:lifecycle-viewmodel:2.0.0"
-//    implementation "androidx.lifecycle:lifecycle-extensions:2.0.0"
-    //高德3D地图、导航、搜索、定位
-    //3D地图so及jar
-    implementation 'com.amap.api:3dmap:latest.integration'
-    //定位功能
-    implementation 'com.amap.api:location:latest.integration'
-    //搜索功能
-    implementation 'com.amap.api:search:latest.integration'
+    //导航插件
+    implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
 }
