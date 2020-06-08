@@ -5,7 +5,7 @@
     <data>
         <variable
             name="vm"
-            type="com.example.edz.jetpack.navi.DiscoverViewModel" />
+            type="com.example.edz.viewmodel.DiscoverViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

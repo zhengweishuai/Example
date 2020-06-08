@@ -1,7 +1,7 @@
 package com.example.edz.api;
 
 import com.example.edz.constant.AppConfigs;
-import com.network.BaseNetworkRequest;
+import com.network.BaseNetwork;
 
 /**
  * author : zhengweishuai
@@ -9,15 +9,15 @@ import com.network.BaseNetworkRequest;
  * e-mail : zhengws@chinacarbon-al.com
  * description ：
  */
-public class NetworkHelp {
+public class NetworkHelper {
     private static IAPI help;
 
     public static IAPI newInstance() {
         if (help == null) {
-            synchronized (NetworkHelp.class) {
+            synchronized (NetworkHelper.class) {
                 if (help == null) {
-                    BaseNetworkRequest baseNetworkRequest = new BaseNetworkRequest();
-                    help = baseNetworkRequest.init(IAPI.class, AppConfigs.base_url);
+                    BaseNetwork baseNetwork = new BaseNetwork();
+                    help = baseNetwork.init(IAPI.class, AppConfigs.base_url);
                 }
             }
         }

@@ -13,7 +13,8 @@ import java.util.concurrent.TimeUnit
  * e-mail : zhengws@chinacarbon-al.com
  * description ：
  */
-open class BaseNetworkRequest : INetworkRequest {
+open class BaseNetwork : INetworkRequest {
+//open class BaseNetworkRequest {
 
 
     //连接超时时间，单位s
@@ -26,19 +27,10 @@ open class BaseNetworkRequest : INetworkRequest {
     private val DEFAULT_WRITE_TIMEOUT = 10L
 
     fun <T> init(clz: Class<T>, baseUrl: String): T {
-        val okHttpClient = OkHttpClient.Builder()
-                .connectTimeout(DEFAULT_CONNECT_TIMEOUT, TimeUnit.SECONDS)
-                .readTimeout(DEFAULT_READ_TIMEOUT, TimeUnit.SECONDS)
-                .writeTimeout(DEFAULT_WRITE_TIMEOUT, TimeUnit.SECONDS)
-                .addInterceptor(HeadInterceptor(HttpHead.headMap))
-                .addInterceptor(LogInterceptor()).build()
         val retrofit = Retrofit.Builder()
                 .baseUrl(baseUrl)
-                .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(CoroutineCallAdapterFactory.invoke())
-                .build()
-        return retrofit.create(clz)
+                .client(onCreateOkHttpClient());
+        return retrofitBuild(retrofit).build().create(clz)
     }
 
 
@@ -60,6 +52,7 @@ open class BaseNetworkRequest : INetworkRequest {
     override fun retrofitBuild(build: Retrofit.Builder): Retrofit.Builder {
         return build
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+//                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addCallAdapterFactory(CoroutineCallAdapterFactory.invoke())
     }
 }

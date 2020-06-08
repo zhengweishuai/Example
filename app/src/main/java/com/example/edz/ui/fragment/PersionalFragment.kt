@@ -1,9 +1,10 @@
-package com.example.edz.jetpack.navi
+package com.example.edz.ui.fragment
 
 import android.content.Intent
 import com.example.edz.application.R
 import com.example.edz.application.databinding.FragmentPersionalBinding
-import com.example.edz.jetpack.mvvm.LoginActivity
+import com.example.edz.ui.activity.LoginActivity
+import com.example.edz.viewmodel.PersionalViewModel
 import com.mvvm.BaseMvvmFragment
 
 /**

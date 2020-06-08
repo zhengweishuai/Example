@@ -69,4 +69,6 @@ dependencies {
     //导航插件
     implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
+    implementation "me.jessyan:autosize:$rootProject.autoSize"
+    implementation "com.lxj:xpopup:$rootProject.xpopup"
 }

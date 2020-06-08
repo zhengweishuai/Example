@@ -1,8 +1,9 @@
-package com.example.edz.jetpack.navi
+package com.example.edz.ui.fragment
 
 import androidx.lifecycle.Observer
 import com.example.edz.application.R
 import com.example.edz.application.databinding.FragmentHomeBinding
+import com.example.edz.viewmodel.HomeViewModel
 import com.mvvm.BaseMvvmFragment
 
 

@@ -1,7 +1,8 @@
-package com.example.edz.jetpack.navi
+package com.example.edz.ui.fragment
 
 import com.example.edz.application.R
 import com.example.edz.application.databinding.FragmentDiscoverBinding
+import com.example.edz.viewmodel.DiscoverViewModel
 import com.mvvm.BaseMvvmFragment
 
 /**

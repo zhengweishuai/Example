@@ -1,4 +1,4 @@
-package com.example.edz.bean.response
+package com.network
 
 /**
  * author : zhengweishuai
@@ -8,4 +8,4 @@ package com.example.edz.bean.response
  */
 data class INetResponse<T>(var errorCode: Int,
                            var errorMsg: String,
-                           var data: T?)
+                           var data: T)

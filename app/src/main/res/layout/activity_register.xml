@@ -7,7 +7,11 @@
 
         <variable
             name="vm"
-            type="com.example.edz.viewmodel.LoginViewModel" />
+            type="com.example.edz.viewmodel.RegisterViewModel" />
+
+        <variable
+            name="click"
+            type="com.example.edz.ui.activity.RegisterActivity.ProxyClick" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,6 +19,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+        <include layout="@layout/layout_base_title" />
 
         <EditText
             android:id="@+id/ed_name"
@@ -26,7 +32,7 @@
             android:background="@drawable/login_shape_edit_selected"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_layout"
             tools:ignore="MissingConstraints" />
 
         <EditText
@@ -36,25 +42,41 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="30dp"
             android:layout_marginRight="30dp"
+            android:inputType="number"
             android:background="@drawable/login_shape_edit_selected"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             app:layout_constraintTop_toBottomOf="@+id/ed_name"
             tools:ignore="MissingConstraints" />
 
-        <Button
-            android:id="@+id/btn_login"
+        <EditText
+            android:id="@+id/ed_pwd_again"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="30dp"
             android:layout_marginRight="30dp"
-            android:background="@drawable/base_selector_btn"
+            android:inputType="number"
+            android:background="@drawable/login_shape_edit_selected"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:text="登录"
-            android:textColor="@color/white"
             app:layout_constraintTop_toBottomOf="@+id/ed_pwd"
+            tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/base_shape_btn_default"
+            android:onClick="@{()->click.toRegister()}"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/register_title"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/ed_pwd_again"
             tools:ignore="MissingConstraints" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

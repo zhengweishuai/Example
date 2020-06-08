@@ -15,8 +15,8 @@ class LogInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         LogUtil.d(request.toString())
-        val response = chain.proceed(request)
-        val content = response.body().toString()
+        val response = chain.proceed(chain.request())
+        val content = response.body()?.string()
         LogUtil.json(content)
         val mediaType = response.body()!!.contentType()
         return response.newBuilder()

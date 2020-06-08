@@ -1,11 +1,10 @@
 package com.example.edz.api
 
-import android.provider.ContactsContract
-import com.example.edz.bean.request.LoginRequest
+import com.example.edz.bean.response.RegisterResponse
 import com.example.edz.bean.response.WebsiteResponse
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
+import com.network.INetResponse
+import okhttp3.RequestBody
+import retrofit2.http.*
 
 /**
  * author : zhengweishuai
@@ -14,9 +13,14 @@ import retrofit2.http.POST
  * description ：
  */
 interface IAPI {
-    @POST("user/login")
-    fun login(@Body loginRequest: LoginRequest): Any
+
+    @FormUrlEncoded
+    @POST("user/register")
+    suspend fun register(@FieldMap maps: Map<String, String>): INetResponse<RegisterResponse>
 
     @GET("friend/json")
-    fun website(): WebsiteResponse
+    suspend fun website(): INetResponse<WebsiteResponse>
+
+    @POST("uc/auth/access/login")
+    suspend fun login(@Body body: RequestBody): String
 }

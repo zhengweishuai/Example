@@ -1,9 +1,8 @@
-package com.example.edz.jetpack.mvvm
+package com.example.edz.ui.activity
 
-import com.example.edz.api.NetworkHelp
 import com.example.edz.application.R
 import com.example.edz.application.databinding.ActivityLoginBinding
-import com.example.edz.bean.request.LoginRequest
+import com.example.edz.viewmodel.LoginViewModel
 import com.mvvm.BaseMvvmActivity
 
 /**
@@ -23,13 +22,15 @@ class LoginActivity : BaseMvvmActivity<LoginViewModel, ActivityLoginBinding>() {
 
     override fun doListener() {
         mDataBind.btnLogin.setOnClickListener {
-            val api = NetworkHelp.newInstance()
-            api.website()
-//            api.login(LoginRequest("111", "111"))
+
         }
     }
 
     override fun doBusiness() {
+    }
 
+    fun ProxyClick(){
+        fun toRegister(){
+        }
     }
 }

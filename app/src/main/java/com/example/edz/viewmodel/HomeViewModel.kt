@@ -1,4 +1,4 @@
-package com.example.edz.jetpack.navi
+package com.example.edz.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

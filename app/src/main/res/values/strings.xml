@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">kitt_demo</string>
+    <string name="register_title">注册</string>
 </resources>

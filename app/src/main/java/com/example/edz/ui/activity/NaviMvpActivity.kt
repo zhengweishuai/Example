@@ -1,4 +1,4 @@
-package com.example.edz.jetpack.navi
+package com.example.edz.ui.activity
 
 import android.os.Bundle
 import androidx.core.view.get

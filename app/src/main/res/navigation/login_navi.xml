@@ -7,21 +7,21 @@
 
     <fragment
         android:id="@+id/home"
-        android:name="com.example.edz.jetpack.navi.HomeFragment"
+        android:name="com.example.edz.ui.fragment.HomeFragment"
         android:label="home_fragment"
         tools:layout="@layout/fragment_home" />
 
 
     <fragment
         android:id="@+id/dicover"
-        android:name="com.example.edz.jetpack.navi.DiscoverFragment"
+        android:name="com.example.edz.ui.fragment.DiscoverFragment"
         android:label="discover_fragment"
         tools:layout="@layout/fragment_discover" />
 
 
     <fragment
         android:id="@+id/user"
-        android:name="com.example.edz.jetpack.navi.PersionalFragment"
+        android:name="com.example.edz.ui.fragment.PersionalFragment"
         android:label="setting_fragment"
         tools:layout="@layout/fragment_persional" />
 </navigation>

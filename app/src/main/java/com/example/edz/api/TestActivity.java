@@ -16,7 +16,6 @@ class TestActivity extends BaseActivity {
 
     @Override
     public void initViews() {
-        NetworkHelp.newInstance();
     }
 
     @Override

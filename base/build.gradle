@@ -53,6 +53,8 @@ dependencies {
     api "com.squareup.retrofit2:converter-gson:$rootProject.ext.gson"
     //Rxjava 结合使用
     api "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$rootProject.ext.rxjava"
+    //RxJava生命周期感知
+    api "com.trello.rxlifecycle2:rxlifecycle-components:$rootProject.ext.rxlifecycle"
     //kt
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     //lifecycle

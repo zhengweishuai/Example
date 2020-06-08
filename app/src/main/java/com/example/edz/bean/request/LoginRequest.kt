@@ -6,5 +6,5 @@ package com.example.edz.bean.request
  * e-mail : zhengws@chinacarbon-al.com
  * description ：登录请求体
  */
-data class LoginRequest(var username: String,
+data class LoginRequest(var account: String,
                         var password: String)
