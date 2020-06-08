@@ -21,10 +21,9 @@ class RegisterViewModel() : BaseViewModel() {
             val map = mutableMapOf<String, String>()
             map["username"] = name
             map["password"] = pwd
-            map["repassword"] = pwd
-            NetworkHelper.newInstance().register(map)
+            NetworkHelper.newInstance().login(map)
         }, {
-            inetResponse.postValue(it)
+            LogUtil.d(it.toString())
         }, {
             LogUtil.d(it.toString())
         })

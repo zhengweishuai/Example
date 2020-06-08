@@ -3,8 +3,10 @@ package com.example.edz.api
 import com.example.edz.bean.response.RegisterResponse
 import com.example.edz.bean.response.WebsiteResponse
 import com.network.INetResponse
-import okhttp3.RequestBody
-import retrofit2.http.*
+import retrofit2.http.FieldMap
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
+import retrofit2.http.POST
 
 /**
  * author : zhengweishuai
@@ -21,6 +23,7 @@ interface IAPI {
     @GET("friend/json")
     suspend fun website(): INetResponse<WebsiteResponse>
 
-    @POST("uc/auth/access/login")
-    suspend fun login(@Body body: RequestBody): String
+    @FormUrlEncoded
+    @POST("user/login")
+    suspend fun login(@FieldMap maps: Map<String, String>): INetResponse<Any>
 }
