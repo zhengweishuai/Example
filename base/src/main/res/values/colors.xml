@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="white">#ffffff</color>
+    <color name="color_f2f4f5">#f2f4f5</color>
     <color name="color_2c2c2c">#2c2c2c</color>
     <color name="color_3cc051">#3cc051</color>
     <color name="color_f7f7f7">#f7f7f7</color>
@@ -9,4 +10,9 @@
     <color name="color_e0e0e0">#e0e0e0</color>
     <color name="color_061e3a">#061e3a</color>
     <color name="color_f1f3f4">#f1f3f4</color>
+    <color name="color_ce3d3a">#ce3d3a</color>
+    <color name="color_333333">#333333</color>
+    <color name="color_666666">#666666</color>
+    <color name="color_999999">#999999</color>
+    <color name="color_cccccc">#cccccc</color>
 </resources>

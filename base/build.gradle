@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin:'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 // 不需要寻找控件，也就不需要生成R2，所以无需添加plugin
 // apply plugin: 'com.jakewharton.butterknife'
@@ -44,7 +45,7 @@ dependencies {
     // 仅在BaseActivity中bind，不需要寻找控件，也就不需要生成java文件，无需使用annotationProcessor
     api "com.gyf.immersionbar:immersionbar:$rootProject.ext.immersionbar"
     api "com.github.bumptech.glide:glide:$rootProject.ext.glide"
-    api "com.github.CymChad:BaseRecyclerViewAdapterHelper:$rootProject.ext.adapterhelper"
+//    api "com.github.CymChad:BaseRecyclerViewAdapterHelper:$rootProject.ext.adapterhelper"
     //log
     api "com.orhanobut:logger:$rootProject.ext.logger"
     // retrofit
@@ -69,4 +70,8 @@ dependencies {
 //    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutines"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutines"
     api "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$rootProject.coroutines_adapter"
+    // 基础依赖包，必须要依赖
+    implementation "com.gyf.immersionbar:immersionbar:$rootProject.immersionbar"
+    // kotlin扩展（可选）
+    implementation "com.gyf.immersionbar:immersionbar-ktx:$rootProject.immersionbar"
 }

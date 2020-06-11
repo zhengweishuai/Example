@@ -20,7 +20,7 @@ interface IViewModelAction {
     /*
     显示toast
      */
-    fun showToast()
+    fun showToast(msg: String)
 
     /*
     显示异常弹窗

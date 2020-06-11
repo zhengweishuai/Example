@@ -8,14 +8,14 @@ package com.mvvm.vm
  */
 object ViewModelConstant {
     //显示loading
-    val ACTION_SHOW_LOADING: Int = 1001
+    const val ACTION_SHOW_LOADING: Int = 1001
 
     //隐藏loading
-    val ACTION_HIDE_LOADING: Int = 1002
+    const val ACTION_HIDE_LOADING: Int = 1002
 
     //显示异常弹窗
-    val ACTION_SHOW_ERROR_POPUP: Int = 1003
+    const val ACTION_SHOW_ERROR_POPUP: Int = 1003
 
     //显示toast
-    val ACTION_SHOW_TOAST: Int = 1004
+    const val ACTION_SHOW_TOAST: Int = 1004
 }

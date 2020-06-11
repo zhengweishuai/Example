@@ -1,7 +1,11 @@
 package com.example.edz.viewmodel
 
-import com.example.edz.bean.request.RegisterRequest
+import androidx.lifecycle.MutableLiveData
+import com.example.edz.api.NetworkHelper
+import com.example.edz.bean.UserBean
+import com.example.edz.utils.UserDataUtil
 import com.mvvm.vm.BaseViewModel
+import com.mvvm.vm.request
 
 /**
  * author : zhengweishuai
@@ -11,13 +15,19 @@ import com.mvvm.vm.BaseViewModel
  */
 class LoginViewModel() : BaseViewModel() {
 
-    fun register(request: RegisterRequest) {
-//        request({
-//            NetworkHelper.newInstance().register(request)
-//        }, {
-//            LogUtil.d(it.toString())
-//        }, {
-//            LogUtil.d(it.toString())
-//        })
+    var loginResponse = MutableLiveData<UserBean>()
+
+    fun login(name: String, pwd: String) {
+        request({
+            val map = mutableMapOf<String, String>()
+            map["username"] = name
+            map["password"] = pwd
+            NetworkHelper.newInstance().login(map)
+        }, {
+            //保存用户信息到本地
+            UserDataUtil.putUserData(it)
+            loginResponse.postValue(it)
+        }, {
+        })
     }
 }

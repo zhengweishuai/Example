@@ -20,7 +20,7 @@
 
 
     <fragment
-        android:id="@+id/user"
+        android:id="@+id/other"
         android:name="com.example.edz.ui.fragment.PersionalFragment"
         android:label="setting_fragment"
         tools:layout="@layout/fragment_persional" />

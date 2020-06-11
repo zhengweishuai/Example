@@ -1,12 +1,11 @@
 package com.example.edz.api
 
-import com.example.edz.bean.response.RegisterResponse
-import com.example.edz.bean.response.WebsiteResponse
+import com.example.edz.bean.BannerBean
+import com.example.edz.bean.HomeArticleListResponse
+import com.example.edz.bean.UserBean
+import com.example.edz.bean.WebsiteResponse
 import com.network.INetResponse
-import retrofit2.http.FieldMap
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 /**
  * author : zhengweishuai
@@ -16,14 +15,24 @@ import retrofit2.http.POST
  */
 interface IAPI {
 
+    //注册
     @FormUrlEncoded
     @POST("user/register")
-    suspend fun register(@FieldMap maps: Map<String, String>): INetResponse<RegisterResponse>
+    suspend fun register(@FieldMap maps: Map<String, String>): INetResponse<UserBean>
 
     @GET("friend/json")
     suspend fun website(): INetResponse<WebsiteResponse>
 
+    //登录
     @FormUrlEncoded
     @POST("user/login")
-    suspend fun login(@FieldMap maps: Map<String, String>): INetResponse<Any>
+    suspend fun login(@FieldMap maps: Map<String, String>): INetResponse<UserBean>
+
+    //首页的banner
+    @GET("banner/json")
+    suspend fun banners(): INetResponse<MutableList<BannerBean>>
+
+    //广场列表数据
+    @GET
+    suspend fun homeArticleList(@Url url: String): INetResponse<HomeArticleListResponse>
 }

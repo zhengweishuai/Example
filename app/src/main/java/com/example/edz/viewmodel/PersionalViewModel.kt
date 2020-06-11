@@ -1,6 +1,6 @@
 package com.example.edz.viewmodel
 
-import androidx.lifecycle.ViewModel
+import com.mvvm.vm.BaseViewModel
 
 /**
  * author : zhengweishuai
@@ -8,5 +8,5 @@ import androidx.lifecycle.ViewModel
  * e-mail : zhengws@chinacarbon-al.com
  * description ：
  */
-class PersionalViewModel : ViewModel() {
+class PersionalViewModel : BaseViewModel() {
 }

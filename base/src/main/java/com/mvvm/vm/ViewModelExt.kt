@@ -2,26 +2,42 @@ package com.mvvm.vm
 
 import androidx.lifecycle.viewModelScope
 import com.network.INetResponse
+import com.network.NeworkConstant
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-
+/**
+ * params:
+ * block 网络请求函数
+ * success 请求成功回调
+ * failure 请求失败回调
+ * showLoading loading显示开关（默认打开）
+ * showToast 请求异常toast开关（默认打开）
+ */
 fun <T> BaseViewModel.request(
-        block: suspend () -> INetResponse<T>,
+        block: suspend () -> INetResponse<T>?,
         success: (T) -> Unit,
-        failure: (Throwable) -> Unit = {}) {
+        failure: (Throwable) -> Unit = {},
+        showLoading: Boolean = true,
+        showToast: Boolean = true) {
 
     viewModelScope.launch(Dispatchers.Main) {
-        this@request.showLoading()
+        if (showLoading) this@request.showLoading()
         runCatching {
             withContext(Dispatchers.IO) { block() }
         }.onSuccess {
-            success(it.data)
-            this@request.hideLoading()
+            it?.let {
+                if (it.errorCode == NeworkConstant.INET_REQUEST_SUCCESS) {
+                    success(it.data)
+                } else if (showToast) {
+                    this@request.showToast(it.errorMsg)
+                }
+            }
+            if (showLoading) this@request.hideLoading()
         }.onFailure {
             failure(it)
-            this@request.hideLoading()
+            if (showLoading) this@request.hideLoading()
         }
     }
 }

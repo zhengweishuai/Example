@@ -1,7 +1,9 @@
 package com.example.edz.ui.activity
 
 import android.content.Intent
+import android.text.Editable
 import android.text.TextUtils
+import android.text.TextWatcher
 import androidx.lifecycle.Observer
 import com.example.edz.application.R
 import com.example.edz.application.databinding.ActivityRegisterBinding
@@ -16,7 +18,7 @@ import kotlinx.android.synthetic.main.layout_base_title.*
  * e-mail : zhengws@chinacarbon-al.com
  * description ：注册
  */
-class RegisterActivity : BaseMvvmActivity<RegisterViewModel, ActivityRegisterBinding>() {
+class RegisterActivity : BaseMvvmActivity<RegisterViewModel, ActivityRegisterBinding>(), TextWatcher {
 
     override fun attachLayoutRes(): Int = R.layout.activity_register
 
@@ -30,12 +32,16 @@ class RegisterActivity : BaseMvvmActivity<RegisterViewModel, ActivityRegisterBin
     }
 
     override fun doListener() {
-
+        ed_name.addTextChangedListener(this)
+        ed_pwd.addTextChangedListener(this)
+        ed_pwd_again.addTextChangedListener(this)
     }
 
     override fun doBusiness() {
         mViewModel.inetResponse.observe(this, Observer {
-            startActivity(Intent(this, LoginActivity::class.java))
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.putExtra("nikeName", it.nickname)
+            startActivity(intent)
         })
     }
 
@@ -50,5 +56,23 @@ class RegisterActivity : BaseMvvmActivity<RegisterViewModel, ActivityRegisterBin
                 showToast("填写信息有误")
             }
         }
+    }
+
+
+    override fun afterTextChanged(s: Editable?) {
+        btn_register.setBackgroundResource(
+                if (!TextUtils.isEmpty(ed_name.text.toString()) &&
+                        !TextUtils.isEmpty(ed_pwd.text.toString()) &&
+                        !TextUtils.isEmpty(ed_pwd.text.toString()))
+                    R.drawable.base_shape_btn_selected else
+                    R.drawable.base_shape_btn_default)
+    }
+
+    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+    }
+
+    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
     }
 }

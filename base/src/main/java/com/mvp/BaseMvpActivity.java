@@ -16,7 +16,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.base.BaseActivity;
 import com.base.R;
-import com.gyf.barlibrary.ImmersionBar;
+import com.gyf.immersionbar.ImmersionBar;
 import com.utils.DensityUtil;
 import com.widget.loading.SlackLoadingView;
 import com.widget.toast.ToastUtils;
@@ -73,7 +73,6 @@ public abstract class BaseMvpActivity<P extends IBasePresenter> extends BaseActi
         if (presenter != null) {
             presenter.detachView();
         }
-        immersionBar.destroy(); //必须调用该方法，防止内存泄漏
     }
 
     /**

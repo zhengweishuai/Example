@@ -66,4 +66,6 @@ ext {
     autoSize = "1.2.1"
     //弹窗
     xpopup = "1.8.10"
+    //状态栏沉浸
+    immersionbar = "3.0.0"
 }

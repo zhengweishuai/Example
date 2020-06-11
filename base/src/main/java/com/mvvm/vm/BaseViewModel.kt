@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel
  * description ：
  */
 open class BaseViewModel() : ViewModel(), IViewModelAction {
+
     var vmLiveData = MutableLiveData<ViewModelActionEvent>()
     override fun showLoading() {
         val event = ViewModelActionEvent(ViewModelConstant.ACTION_SHOW_LOADING)
@@ -21,8 +22,9 @@ open class BaseViewModel() : ViewModel(), IViewModelAction {
         vmLiveData.postValue(event)
     }
 
-    override fun showToast() {
+    override fun showToast(msg: String) {
         val event = ViewModelActionEvent(ViewModelConstant.ACTION_SHOW_TOAST)
+        event.msg = msg
         vmLiveData.postValue(event)
     }
 

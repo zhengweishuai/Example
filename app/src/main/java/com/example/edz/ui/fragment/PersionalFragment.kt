@@ -3,7 +3,9 @@ package com.example.edz.ui.fragment
 import android.content.Intent
 import com.example.edz.application.R
 import com.example.edz.application.databinding.FragmentPersionalBinding
+import com.example.edz.constant.AppStaticRes
 import com.example.edz.ui.activity.LoginActivity
+import com.example.edz.utils.UserDataUtil
 import com.example.edz.viewmodel.PersionalViewModel
 import com.mvvm.BaseMvvmFragment
 
@@ -25,6 +27,9 @@ class PersionalFragment : BaseMvvmFragment<PersionalViewModel, FragmentPersional
     }
 
     override fun doBusiness() {
-        startActivity(Intent(requireActivity(), LoginActivity::class.java))
+        if (UserDataUtil.getUserData() == null) {
+            val intent = Intent(requireActivity(), LoginActivity::class.java)
+            startActivityForResult(intent, AppStaticRes.LOGIN_REQUEST_CODE)
+        }
     }
 }

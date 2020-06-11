@@ -1,4 +1,4 @@
-package com.example.edz.bean.response;
+package com.example.edz.bean;
 
 /**
  * author : zhengweishuai

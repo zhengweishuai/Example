@@ -2,7 +2,7 @@ package com.example.edz.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import com.example.edz.api.NetworkHelper
-import com.example.edz.bean.response.RegisterResponse
+import com.example.edz.bean.UserBean
 import com.mvvm.vm.BaseViewModel
 import com.mvvm.vm.request
 import com.utils.LogUtil
@@ -15,15 +15,16 @@ import com.utils.LogUtil
  */
 class RegisterViewModel() : BaseViewModel() {
 
-    var inetResponse = MutableLiveData<RegisterResponse>()
+    var inetResponse = MutableLiveData<UserBean>()
     fun register(name: String, pwd: String) {
         request({
             val map = mutableMapOf<String, String>()
             map["username"] = name
             map["password"] = pwd
-            NetworkHelper.newInstance().login(map)
+            map["repassword"] = pwd
+            NetworkHelper.newInstance().register(map)
         }, {
-            LogUtil.d(it.toString())
+            inetResponse.postValue(it)
         }, {
             LogUtil.d(it.toString())
         })

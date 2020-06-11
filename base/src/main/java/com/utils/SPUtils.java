@@ -42,7 +42,7 @@ public class SPUtils {
 
 		Editor editor = SPUtils.sharedPreferences.edit();
 		editor.remove(key);
-		editor.commit();
+		editor.apply();
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class SPUtils {
 		}
 		Editor editor = SPUtils.sharedPreferences.edit();
 		editor.putString(key, value);
-		editor.commit();
+		editor.apply();
 	}
 
 	/**
@@ -67,7 +67,7 @@ public class SPUtils {
 	public static void putPreferences(String key, boolean value) {
 		Editor editor = SPUtils.sharedPreferences.edit();
 		editor.putBoolean(key, value);
-		editor.commit();
+		editor.apply();
 	}
 
 	/**
@@ -78,7 +78,7 @@ public class SPUtils {
 	public static void putPreferences(String key, int value) {
 		Editor editor = SPUtils.sharedPreferences.edit();
 		editor.putInt(key, value);
-		editor.commit();
+		editor.apply();
 	}
 
 	/**
@@ -89,7 +89,7 @@ public class SPUtils {
 	public static void putPreferences(String key, long value) {
 		Editor editor = SPUtils.sharedPreferences.edit();
 		editor.putLong(key, value);
-		editor.commit();
+		editor.apply();
 	}
 
 	/**
@@ -100,7 +100,7 @@ public class SPUtils {
 	public static void putPreferences(String key, float value) {
 		Editor editor = SPUtils.sharedPreferences.edit();
 		editor.putFloat(key, value);
-		editor.commit();
+		editor.apply();
 	}
 
 	/**

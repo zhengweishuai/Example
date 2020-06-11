@@ -6,4 +6,4 @@ package com.mvvm.vm
  * e-mail : zhengws@chinacarbon-al.com
  * description ：
  */
-class ViewModelActionEvent(var action: Int)
+class ViewModelActionEvent(var action: Int, var msg:String = "")

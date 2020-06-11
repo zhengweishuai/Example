@@ -8,8 +8,12 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.mvvm.vm.BaseViewModel
+import com.mvvm.vm.ViewModelConstant
+import com.utils.LogUtil
 import com.utils.getClazz
 
 /**
@@ -18,7 +22,7 @@ import com.utils.getClazz
  * e-mail : zhengws@chinacarbon-al.com
  * description ：
  */
-abstract class BaseMvvmFragment<vm : ViewModel, db : ViewDataBinding> : Fragment() {
+abstract class BaseMvvmFragment<vm : BaseViewModel, db : ViewDataBinding> : Fragment() {
     private var isLoad = false;//
     lateinit var mDataBind: db
     lateinit var mViewModel: vm
@@ -37,6 +41,7 @@ abstract class BaseMvvmFragment<vm : ViewModel, db : ViewDataBinding> : Fragment
         initViews()
         initListener()
         doBusiness()
+        doViewModelBusiness()
     }
 
     override fun onResume() {
@@ -47,6 +52,28 @@ abstract class BaseMvvmFragment<vm : ViewModel, db : ViewDataBinding> : Fragment
     override fun onDestroyView() {
         super.onDestroyView()
         isLoad = false
+    }
+
+    private fun doViewModelBusiness() {
+        mViewModel.vmLiveData.observe(viewLifecycleOwner, Observer {
+            var activity: BaseMvvmActivity<*,*> = requireActivity() as BaseMvvmActivity<*, *>
+            when (it.action) {
+                ViewModelConstant.ACTION_SHOW_LOADING -> {
+                    LogUtil.d("显示loading")
+                    activity.showLoading(true)
+                }
+                ViewModelConstant.ACTION_HIDE_LOADING -> {
+                    LogUtil.d("隐藏loading")
+                    activity.showLoading(false)
+                }
+                ViewModelConstant.ACTION_SHOW_TOAST -> {
+                    activity.showToast(it.msg)
+                }
+                ViewModelConstant.ACTION_SHOW_ERROR_POPUP -> {
+
+                }
+            }
+        })
     }
 
     /*

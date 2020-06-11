@@ -1,27 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <fragment
-        android:id="@+id/splash"
-        android:name="androidx.navigation.fragment.NavHostFragment"
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="60dp"
-        app:defaultNavHost="true"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/navi_view"
-        app:navGraph="@navigation/login_navi" />
+        android:background="@color/color_f1f3f4">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/navi_view"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        app:itemIconTint="@drawable/main_selector_navi_color"
-        app:itemTextColor="@drawable/main_selector_navi_color"
-        app:labelVisibilityMode="labeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottom_navi_menu" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <fragment
+            android:id="@+id/splash"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="55dp"
+            app:defaultNavHost="true"
+            app:layout_constraintBottom_toTopOf="@+id/navi_view"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navGraph="@navigation/login_navi" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/navi_view"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="@color/white"
+            app:itemIconTint="@drawable/main_selector_navi_color"
+            app:itemTextColor="@drawable/main_selector_navi_color"
+            app:labelVisibilityMode="labeled"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:menu="@menu/bottom_navi_menu" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
