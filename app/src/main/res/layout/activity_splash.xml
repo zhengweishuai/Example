@@ -11,26 +11,57 @@
         android:layout_height="match_parent"
         android:background="@color/color_f1f3f4">
 
-        <fragment
-            android:id="@+id/splash"
-            android:name="androidx.navigation.fragment.NavHostFragment"
+        <FrameLayout
+            android:id="@+id/content_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="55dp"
-            app:defaultNavHost="true"
-            app:layout_constraintBottom_toTopOf="@+id/navi_view"
-            app:layout_constraintTop_toTopOf="parent"
-            app:navGraph="@navigation/login_navi" />
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/navi_view"
+        <RadioGroup
+            android:id="@+id/rg_layout"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:background="@color/white"
-            app:itemIconTint="@drawable/main_selector_navi_color"
-            app:itemTextColor="@drawable/main_selector_navi_color"
-            app:labelVisibilityMode="labeled"
+            android:elevation="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:menu="@menu/bottom_navi_menu" />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <RadioButton
+                android:id="@+id/rb_home"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:button="@null"
+                android:drawableTop="@drawable/main_selector_navi_home"
+                android:gravity="center"
+                android:text="首页"
+                android:textColor="@color/color_666666" />
+
+            <RadioButton
+                android:id="@+id/rb_discover"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:button="@null"
+                android:drawableTop="@drawable/main_selector_navi_discover"
+                android:gravity="center"
+                android:text="发现"
+                android:textColor="@color/color_666666" />
+
+            <RadioButton
+                android:id="@+id/rb_other"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:button="@null"
+                android:drawableTop="@drawable/main_selector_navi_other"
+                android:gravity="center"
+                android:text="其他"
+                android:textColor="@color/color_666666" />
+        </RadioGroup>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

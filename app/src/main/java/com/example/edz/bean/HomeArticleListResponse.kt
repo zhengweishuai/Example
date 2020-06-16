@@ -6,4 +6,4 @@ package com.example.edz.bean
  * e-mail : zhengws@chinacarbon-al.com
  * description ：
  */
-data class HomeArticleListResponse(var datas: MutableList<ArticleListItemBean>?)
+data class HomeArticleListResponse(var datas: ArrayList<ArticleListItemBean>?)

@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 abstract class BaseAdapter<T, DB : ViewDataBinding>(val mContext: Context, val br_id: Int) :
         RecyclerView.Adapter<SupperViewHodel>() {
 
-    var mList = mutableListOf<T>()
+    var mList = ArrayList<T>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SupperViewHodel {
         val view = LayoutInflater.from(mContext).inflate(ItemLayoutId(), parent, false)
         return SupperViewHodel(view)
@@ -34,7 +34,7 @@ abstract class BaseAdapter<T, DB : ViewDataBinding>(val mContext: Context, val b
 
     abstract fun ItemLayoutId(): Int
 
-    fun setNewData(data: Collection<T>) {
+    fun setNewData(data: ArrayList<T>) {
         mList.clear()
         mList.addAll(data)
         notifyDataSetChanged()
@@ -45,7 +45,7 @@ abstract class BaseAdapter<T, DB : ViewDataBinding>(val mContext: Context, val b
         notifyItemInserted(mList.size)
     }
 
-    fun addList(data: Collection<T>) {
+    fun addList(data: ArrayList<T>) {
         mList.addAll(data)
         if (mList.size == data.size) {
             notifyDataSetChanged()

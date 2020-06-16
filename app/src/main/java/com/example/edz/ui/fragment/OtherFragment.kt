@@ -15,7 +15,7 @@ import com.mvvm.BaseMvvmFragment
  * e-mail : zhengws@chinacarbon-al.com
  * description ：
  */
-class PersionalFragment : BaseMvvmFragment<PersionalViewModel, FragmentPersionalBinding>() {
+class OtherFragment : BaseMvvmFragment<PersionalViewModel, FragmentPersionalBinding>() {
     override fun attachLayoutRes(): Int = R.layout.fragment_persional
 
     override fun initViews() {

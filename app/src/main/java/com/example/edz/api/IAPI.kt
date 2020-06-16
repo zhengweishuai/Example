@@ -1,9 +1,6 @@
 package com.example.edz.api
 
-import com.example.edz.bean.BannerBean
-import com.example.edz.bean.HomeArticleListResponse
-import com.example.edz.bean.UserBean
-import com.example.edz.bean.WebsiteResponse
+import com.example.edz.bean.*
 import com.network.INetResponse
 import retrofit2.http.*
 
@@ -30,9 +27,17 @@ interface IAPI {
 
     //首页的banner
     @GET("banner/json")
-    suspend fun banners(): INetResponse<MutableList<BannerBean>>
+    suspend fun banners(): INetResponse<ArrayList<BannerBean>>
 
     //广场列表数据
     @GET
     suspend fun homeArticleList(@Url url: String): INetResponse<HomeArticleListResponse>
+
+    //公众号列表
+    @GET("wxarticle/chapters/json")
+    suspend fun wxarticle(): INetResponse<ArrayList<ArticleAuthorBean>>
+
+    //公众号下的文章列表
+    @GET()
+    suspend fun wxArticleHistory(@Url url: String): INetResponse<HomeArticleListResponse>
 }

@@ -14,21 +14,23 @@ import com.mvvm.vm.request
  * description ：
  */
 class HomeViewModel : BaseViewModel() {
-    var bannerData = MutableLiveData<MutableList<BannerBean>>()
-    var articleData = MutableLiveData<MutableList<ArticleListItemBean>>()
+    var bannerData = MutableLiveData<ArrayList<BannerBean>>()
+    var articleData = MutableLiveData<ArrayList<ArticleListItemBean>>()
 
     fun requestBanners() {
         request({
             NetworkHelper.newInstance().banners()
         }, {
-            bannerData.postValue(it as MutableList<BannerBean>?)
+            it.add(it.size, it[0])
+            it.add(0, it[it.size - 2])
+            bannerData.postValue(it)
         }, {
 
         })
     }
 
     fun requestArticleList(pageNum: Int) {
-        var url = "article/list/" + pageNum + "0/json"
+        val url = "article/list/$pageNum/json"
         request({ NetworkHelper.newInstance().homeArticleList(url) },
                 {
                     articleData.postValue(it.datas)
@@ -37,5 +39,4 @@ class HomeViewModel : BaseViewModel() {
 
                 })
     }
-
 }

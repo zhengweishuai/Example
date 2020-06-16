@@ -9,7 +9,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.mvvm.vm.BaseViewModel
 import com.mvvm.vm.ViewModelConstant
@@ -23,17 +22,16 @@ import com.utils.getClazz
  * description ：
  */
 abstract class BaseMvvmFragment<vm : BaseViewModel, db : ViewDataBinding> : Fragment() {
-    private var isLoad = false;//
+    private var isLoad = false
     lateinit var mDataBind: db
     lateinit var mViewModel: vm
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(attachLayoutRes(), container, false)
-        mDataBind = DataBindingUtil.bind<db>(rootView)!!.also {
+        mDataBind = DataBindingUtil.inflate<db>(inflater, attachLayoutRes(), container, false).also {
             //感知生命周期
             it.lifecycleOwner = this
         }
         mViewModel = ViewModelProvider(this).get(getClazz(this))
-        return rootView
+        return mDataBind.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,13 +48,14 @@ abstract class BaseMvvmFragment<vm : BaseViewModel, db : ViewDataBinding> : Frag
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
+        LogUtil.d("------------------>onDestroyView" + this.javaClass.simpleName)
         isLoad = false
+        super.onDestroyView()
     }
 
     private fun doViewModelBusiness() {
         mViewModel.vmLiveData.observe(viewLifecycleOwner, Observer {
-            var activity: BaseMvvmActivity<*,*> = requireActivity() as BaseMvvmActivity<*, *>
+            val activity: BaseMvvmActivity<*, *> = requireActivity() as BaseMvvmActivity<*, *>
             when (it.action) {
                 ViewModelConstant.ACTION_SHOW_LOADING -> {
                     LogUtil.d("显示loading")
@@ -102,5 +101,10 @@ abstract class BaseMvvmFragment<vm : BaseViewModel, db : ViewDataBinding> : Frag
      */
     protected open fun lazyLoad() {
         isLoad = true
+    }
+
+    override fun onDestroy() {
+        LogUtil.d("------------------>onDestroy" + this.javaClass.simpleName)
+        super.onDestroy()
     }
 }

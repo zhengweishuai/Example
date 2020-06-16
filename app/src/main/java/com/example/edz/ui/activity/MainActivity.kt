@@ -1,17 +1,16 @@
 package com.example.edz.ui.activity
 
-import androidx.core.view.get
-import androidx.databinding.ViewDataBinding
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
+import android.view.View
+import androidx.core.content.ContextCompat
 import com.example.edz.application.R
 import com.example.edz.application.databinding.ActivitySplashBinding
-import com.google.android.material.bottomnavigation.BottomNavigationItemView
-import com.google.android.material.bottomnavigation.BottomNavigationMenuView
+import com.example.edz.ui.fragment.DiscoverFragment
+import com.example.edz.ui.fragment.HomeFragment
+import com.example.edz.ui.fragment.OtherFragment
 import com.mvvm.BaseMvvmActivity
+import com.mvvm.BaseMvvmFragment
 import com.mvvm.vm.BaseViewModel
 import kotlinx.android.synthetic.main.activity_splash.*
-import java.util.logging.Handler
 
 
 /**
@@ -20,34 +19,74 @@ import java.util.logging.Handler
  * e-mail : zhengws@chinacarbon-al.com
  * description ：
  */
-class MainActivity : BaseMvvmActivity<BaseViewModel, ActivitySplashBinding>() {
-
-    override fun initViews() {
-        val host = supportFragmentManager.findFragmentById(R.id.splash) as NavHostFragment
-        val navController = host.navController
-        navi_view.setupWithNavController(navController)
-//        naviAddMark()
+class MainActivity : BaseMvvmActivity<BaseViewModel, ActivitySplashBinding>(), View.OnClickListener {
+    private val homeFragment by lazy {
+        HomeFragment()
     }
+    private val discoverFragment by lazy {
+        DiscoverFragment()
+    }
+    private val otherFragment by lazy {
+        OtherFragment()
+    }
+    private var currentFragment: BaseMvvmFragment<*, *>? = null
 
     override fun attachLayoutRes(): Int = R.layout.activity_splash
 
-    override fun doListener() {
+    override fun initViews() {
+        rb_home.apply {
+            isChecked = true
+            setTextColor(ContextCompat.getColor(this@MainActivity, R.color.color_d81e06))
+        }
+        supportFragmentManager.beginTransaction().add(R.id.content_layout, homeFragment)
+                .show(homeFragment)
+                .commitAllowingStateLoss()
+        currentFragment = homeFragment
+    }
 
+    override fun doListener() {
+        rb_home.setOnClickListener(this)
+        rb_discover.setOnClickListener(this)
+        rb_other.setOnClickListener(this)
     }
 
     override fun doBusiness() {
 
     }
 
-    /*
-    导航栏添加标签
-    */
-    private fun naviAddMark() {
-        val menuView = navi_view.get(0) as BottomNavigationMenuView
-        val itemView = menuView.get(0) as BottomNavigationItemView
-        val mark = layoutInflater.inflate(R.layout.view_navi_mark, itemView, false)
-        itemView.addView(mark)
+    private fun resetRbTv() {
+        rb_home.setTextColor(ContextCompat.getColor(this, R.color.color_666666))
+        rb_discover.setTextColor(ContextCompat.getColor(this, R.color.color_666666))
+        rb_other.setTextColor(ContextCompat.getColor(this, R.color.color_666666))
     }
 
+    override fun onClick(v: View?) {
+        resetRbTv()
+        when (v?.id) {
+            R.id.rb_home -> {
+                rb_home.setTextColor(ContextCompat.getColor(this, R.color.color_d81e06))
+                currentFragment?.let { switchFragment(it, homeFragment) }
+            }
+            R.id.rb_discover -> {
+                rb_discover.setTextColor(ContextCompat.getColor(this, R.color.color_d81e06))
+                currentFragment?.let { switchFragment(it, discoverFragment) }
+            }
+            R.id.rb_other -> {
+                rb_other.setTextColor(ContextCompat.getColor(this, R.color.color_d81e06))
+                currentFragment?.let { switchFragment(it, otherFragment) }
+            }
+        }
+    }
 
+    private fun switchFragment(fromFragment: BaseMvvmFragment<*, *>, toFragment: BaseMvvmFragment<*, *>) {
+        if (toFragment.isAdded) {
+            supportFragmentManager.beginTransaction().hide(fromFragment).show(toFragment).commitAllowingStateLoss()
+        } else {
+            supportFragmentManager.beginTransaction().add(R.id.content_layout, toFragment)
+                    .hide(fromFragment)
+                    .show(toFragment)
+                    .commitAllowingStateLoss()
+        }
+        currentFragment = toFragment
+    }
 }

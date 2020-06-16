@@ -21,6 +21,8 @@ import com.example.edz.viewmodel.HomeViewModel
 import com.lxj.xpopup.XPopup
 import com.lxj.xpopup.enums.PopupPosition
 import com.mvvm.BaseMvvmFragment
+import com.scwang.smart.refresh.layout.api.RefreshLayout
+import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.layout_base_title.*
 
@@ -32,10 +34,10 @@ import kotlinx.android.synthetic.main.layout_base_title.*
  * description ：
  */
 class HomeFragment : BaseMvvmFragment<HomeViewModel, FragmentHomeBinding>() {
-    lateinit var mHandler: Handler
-    private lateinit var mVpRun: Runnable
+    var mHandler = Handler()
     private val vp_switch_duration = 3000L//viewpager切换时间间隔
     private val vp_slide_duration = 1000//viewpager滑动时间
+    private var pageNum: Int = 1
 
     override fun attachLayoutRes(): Int = R.layout.fragment_home
 
@@ -55,25 +57,37 @@ class HomeFragment : BaseMvvmFragment<HomeViewModel, FragmentHomeBinding>() {
         mDataBind.manager = LinearLayoutManager(requireActivity())
         mDataBind.rvAdapter = HomeArticleAdapter(requireActivity(), br_id = BR.itemBeam).apply {
             mViewModel.articleData.observe(this@HomeFragment, Observer {
-                addList(it)
+                if (refresh_view.isRefreshing) refresh_view.finishRefresh()
+                if (refresh_view.isLoading) refresh_view.finishLoadMore()
+                if (pageNum == 1) setNewData(it) else addList(it)
             })
         }
-        mVpRun = Runnable {
-            val itemCount = mDataBind.bannerAdapter?.count
-            itemCount?.let {
-                if (it > 1) {
-                    val currentItem = vp_banner.currentItem
-                    vp_banner.setCurrentItem((currentItem + 1) % it, true)
-                    mHandler?.let {
-                        it.postDelayed(mVpRun, vp_switch_duration)
-                    }
-                }
-            }
+        //vp
+        mDataBind.bannerAdapter = HomeBannerAdapter(requireActivity()).apply {
+            mViewModel.bannerData.observe(this@HomeFragment, Observer {
+                this.addData(it)
+                this.notifyDataSetChanged()
+                //执行轮播
+                mHandler.postDelayed(mVpRun, vp_switch_duration)
+            })
         }
     }
 
     @SuppressLint("ClickableViewAccessibility")
     override fun initListener() {
+        refresh_view.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {
+            override fun onRefresh(refreshLayout: RefreshLayout) {
+                refreshLayout.resetNoMoreData()
+                pageNum = 1
+                mViewModel.requestBanners()
+                mViewModel.requestArticleList(pageNum)
+            }
+
+            override fun onLoadMore(refreshLayout: RefreshLayout) {
+                pageNum++
+                mViewModel.requestArticleList(pageNum)
+            }
+        })
         rl_left.setOnClickListener {
             if (UserDataUtil.getUserData() == null) {
                 startActivity(Intent(requireActivity(), LoginActivity::class.java))
@@ -85,17 +99,6 @@ class HomeFragment : BaseMvvmFragment<HomeViewModel, FragmentHomeBinding>() {
                         .show()
             }
         }
-        //vp
-        mDataBind.bannerAdapter = HomeBannerAdapter(requireActivity()).apply {
-            mViewModel.bannerData.observe(this@HomeFragment, Observer {
-                this.addData(it)
-                this.notifyDataSetChanged()
-                //执行轮播
-                mHandler = Handler()
-                mHandler.postDelayed(mVpRun, vp_switch_duration)
-            })
-        }
-
         vp_banner.setOnTouchListener(OnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
@@ -110,15 +113,56 @@ class HomeFragment : BaseMvvmFragment<HomeViewModel, FragmentHomeBinding>() {
             }
             false
         })
+        vp_banner.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(state: Int) {
+                vp_banner.adapter?.let {
+                    if (state == ViewPager.SCROLL_STATE_IDLE) {
+                        when (vp_banner.currentItem) {
+                            it.count - 1 -> {
+                                vp_banner.setCurrentItem(1, false);
+                            }
+                            0 -> {
+                                vp_banner.setCurrentItem(it.count - 2, false);
+                            }
+                            else -> {
+                                vp_banner.setCurrentItem(vp_banner.currentItem, true);
+                            }
+                        }
+                    }
+                }
+            }
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+
+            }
+
+            override fun onPageSelected(position: Int) {
+            }
+
+        })
     }
 
     override fun doBusiness() {
-        mViewModel.requestBanners()
-        mViewModel.requestArticleList(1)
+        refresh_view.autoRefresh()
     }
 
     override fun onDestroy() {
         mHandler.removeCallbacks(mVpRun)
         super.onDestroy()
+    }
+
+    private var mVpRun: Runnable = object : Runnable {
+        override fun run() {
+            mDataBind.bannerAdapter?.let {
+                val itemCount = it.count
+                if (itemCount > 1) {
+                    vp_banner?.let {
+                        val currentItem = it.currentItem
+                        it.currentItem = (currentItem + 1) % itemCount
+                        mHandler.postDelayed(this, vp_switch_duration)
+                    }
+                }
+            }
+        }
     }
 }

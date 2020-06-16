@@ -19,8 +19,8 @@ fun <T> BaseViewModel.request(
         block: suspend () -> INetResponse<T>?,
         success: (T) -> Unit,
         failure: (Throwable) -> Unit = {},
-        showLoading: Boolean = true,
-        showToast: Boolean = true) {
+        showLoading: Boolean = false,
+        showToast: Boolean = false) {
 
     viewModelScope.launch(Dispatchers.Main) {
         if (showLoading) this@request.showLoading()

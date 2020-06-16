@@ -68,4 +68,6 @@ ext {
     xpopup = "1.8.10"
     //状态栏沉浸
     immersionbar = "3.0.0"
+    //刷新加载
+    refresh = "2.0.1"
 }

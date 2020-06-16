@@ -14,7 +14,6 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.base.R
-import com.gyf.immersionbar.ImmersionBar
 import com.gyf.immersionbar.ktx.immersionBar
 import com.mvvm.vm.BaseViewModel
 import com.mvvm.vm.ViewModelConstant
@@ -32,9 +31,13 @@ import kotlinx.android.synthetic.main.layout_base_loading.*
 abstract class BaseMvvmActivity<vm : BaseViewModel, db : ViewDataBinding> : AppCompatActivity() {
     lateinit var mDataBind: db
     lateinit var mViewModel: vm
-
+    private var activityOpenEnterAnimation = 0
+    private var activityOpenExitAnimation = 0
+    private var activityCloseEnterAnimation = 0
+    private var activityCloseExitAnimation = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        obtainTheme()
         mDataBind = DataBindingUtil.setContentView(this, attachLayoutRes())
         mViewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(application)).get(getClazz(this))
         mDataBind.lifecycleOwner = this
@@ -46,11 +49,36 @@ abstract class BaseMvvmActivity<vm : BaseViewModel, db : ViewDataBinding> : AppC
         doViewModelBusiness()
     }
 
+    @SuppressLint("ResourceType")
+    private fun obtainTheme() {
+        try {
+            if (theme != null) {
+                val activityStyle = theme.obtainStyledAttributes(intArrayOf(android.R.attr.windowAnimationStyle))
+                val windowAnimationStyleResId = activityStyle.getResourceId(0, 0)
+                activityStyle.recycle()
+                val animStyle = theme.obtainStyledAttributes(windowAnimationStyleResId, intArrayOf(android.R.attr.activityOpenEnterAnimation, android.R.attr.activityCloseExitAnimation))
+                activityOpenEnterAnimation = animStyle.getResourceId(0, 0)
+                activityCloseExitAnimation = animStyle.getResourceId(1, 0)
+                animStyle.recycle()
+                val anim = theme.obtainStyledAttributes(windowAnimationStyleResId, intArrayOf(android.R.attr.activityOpenExitAnimation, android.R.attr.activityCloseEnterAnimation))
+                activityOpenExitAnimation = animStyle.getResourceId(0, 0)
+                activityCloseEnterAnimation = animStyle.getResourceId(1, 0)
+                anim.recycle()
+            }
+        } catch (e: Exception) {
+        }
+        overridePendingTransition(activityOpenEnterAnimation, activityOpenExitAnimation)
+    }
+
+    override fun finish() {
+        super.finish()
+        overridePendingTransition(activityCloseEnterAnimation, activityCloseExitAnimation)
+    }
+
     private fun doImmersionbasr() {
         immersionBar {
             fitsSystemWindows(true)
             statusBarColor(R.color.white)
-            navigationBarColor(R.color.color_f2f4f5)
             statusBarDarkFont(true)
         }
     }
@@ -98,6 +126,7 @@ abstract class BaseMvvmActivity<vm : BaseViewModel, db : ViewDataBinding> : AppC
 
     override fun onDestroy() {
         showLoading(false)
+        mDataBind.unbind()
         super.onDestroy()
     }
 
@@ -114,14 +143,12 @@ abstract class BaseMvvmActivity<vm : BaseViewModel, db : ViewDataBinding> : AppC
         val viewGroup = mDataBind.root as? ViewGroup
         if (show) {
             if (loadCount == 0) {
-                LogUtil.d("显示showLoading")
                 viewGroup?.addView(loadingLayout, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
                 loadCount++
                 startRotate(loading)
             }
         } else {
             if (loadCount > 0) {
-                LogUtil.d("隐藏showLoading")
                 viewGroup?.removeView(loadingLayout)
             }
             loadCount = 0

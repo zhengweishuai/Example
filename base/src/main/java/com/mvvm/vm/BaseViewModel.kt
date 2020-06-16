@@ -14,22 +14,22 @@ open class BaseViewModel() : ViewModel(), IViewModelAction {
     var vmLiveData = MutableLiveData<ViewModelActionEvent>()
     override fun showLoading() {
         val event = ViewModelActionEvent(ViewModelConstant.ACTION_SHOW_LOADING)
-        vmLiveData.postValue(event)
+        vmLiveData.setValue(event)
     }
 
     override fun hideLoading() {
         val event = ViewModelActionEvent(ViewModelConstant.ACTION_HIDE_LOADING)
-        vmLiveData.postValue(event)
+        vmLiveData.setValue(event)
     }
 
     override fun showToast(msg: String) {
         val event = ViewModelActionEvent(ViewModelConstant.ACTION_SHOW_TOAST)
         event.msg = msg
-        vmLiveData.postValue(event)
+        vmLiveData.setValue(event)
     }
 
     override fun showErrorPopup() {
         val event = ViewModelActionEvent(ViewModelConstant.ACTION_SHOW_ERROR_POPUP)
-        vmLiveData.postValue(event)
+        vmLiveData.setValue(event)
     }
 }
