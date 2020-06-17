@@ -2,7 +2,7 @@ package com.example.edz.ui.widget
 
 import android.content.Context
 import android.content.Intent
-import com.example.edz.application.R
+import com.example.edz.R
 import com.example.edz.ui.activity.SettingActivity
 import com.example.edz.utils.UserDataUtil
 import com.lxj.xpopup.core.DrawerPopupView

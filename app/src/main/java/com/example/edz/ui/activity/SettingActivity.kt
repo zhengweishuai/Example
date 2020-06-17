@@ -1,8 +1,8 @@
 package com.example.edz.ui.activity
 
 import android.content.Intent
-import com.example.edz.application.R
-import com.example.edz.application.databinding.ActivitySettingBinding
+import com.example.edz.R
+import com.example.edz.databinding.ActivitySettingBinding
 import com.example.edz.constant.SPConfigs
 import com.example.edz.ui.widget.CustomPopup
 import com.example.edz.viewmodel.SettingViewModel

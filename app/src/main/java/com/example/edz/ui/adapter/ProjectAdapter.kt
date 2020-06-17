@@ -1,8 +1,8 @@
 package com.example.edz.ui.adapter
 
 import android.content.Context
-import com.example.edz.application.R
-import com.example.edz.application.databinding.LayoutAdapterProjectItemBinding
+import com.example.edz.R
+import com.example.edz.databinding.LayoutAdapterProjectItemBinding
 import com.example.edz.bean.ProjectDetailBean
 
 /**

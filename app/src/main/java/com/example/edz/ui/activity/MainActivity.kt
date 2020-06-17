@@ -2,8 +2,8 @@ package com.example.edz.ui.activity
 
 import android.view.View
 import androidx.core.content.ContextCompat
-import com.example.edz.application.R
-import com.example.edz.application.databinding.ActivitySplashBinding
+import com.example.edz.R
+import com.example.edz.databinding.ActivitySplashBinding
 import com.example.edz.ui.fragment.DiscoverFragment
 import com.example.edz.ui.fragment.HomeFragment
 import com.example.edz.ui.fragment.OtherFragment

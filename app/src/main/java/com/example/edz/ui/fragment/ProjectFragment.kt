@@ -2,9 +2,9 @@ package com.example.edz.ui.fragment
 
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.edz.application.BR
-import com.example.edz.application.R
-import com.example.edz.application.databinding.FragmentProjectBinding
+import com.example.edz.R
+import com.example.edz.BR
+import com.example.edz.databinding.FragmentProjectBinding
 import com.example.edz.ui.adapter.ProjectAdapter
 import com.example.edz.viewmodel.ProjectViewModel
 import com.mvvm.BaseMvvmFragment

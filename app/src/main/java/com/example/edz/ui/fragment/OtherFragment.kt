@@ -1,8 +1,8 @@
 package com.example.edz.ui.fragment
 
 import android.content.Intent
-import com.example.edz.application.R
-import com.example.edz.application.databinding.FragmentPersionalBinding
+import com.example.edz.R
+import com.example.edz.databinding.FragmentPersionalBinding
 import com.example.edz.constant.AppStaticRes
 import com.example.edz.ui.activity.LoginActivity
 import com.example.edz.utils.UserDataUtil

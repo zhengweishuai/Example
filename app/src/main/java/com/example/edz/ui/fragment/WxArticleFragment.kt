@@ -2,9 +2,9 @@ package com.example.edz.ui.fragment
 
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.edz.application.BR
-import com.example.edz.application.R
-import com.example.edz.application.databinding.FragmentWxArticleBinding
+import com.example.edz.R
+import com.example.edz.BR
+import com.example.edz.databinding.FragmentWxArticleBinding
 import com.example.edz.ui.adapter.DiscoverArticleAdapter
 import com.example.edz.ui.adapter.DiscoverAuthorAdapter
 import com.example.edz.viewmodel.WxArticleViewModel

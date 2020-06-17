@@ -8,9 +8,9 @@ import android.view.View.OnTouchListener
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.ViewPager
-import com.example.edz.application.BR
-import com.example.edz.application.R
-import com.example.edz.application.databinding.FragmentHomeBinding
+import com.example.edz.BR
+import com.example.edz.R
+import com.example.edz.databinding.FragmentHomeBinding
 import com.example.edz.ui.activity.LoginActivity
 import com.example.edz.ui.adapter.HomeArticleAdapter
 import com.example.edz.ui.adapter.HomeBannerAdapter

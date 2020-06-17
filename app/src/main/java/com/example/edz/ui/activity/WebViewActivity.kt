@@ -8,8 +8,8 @@ import android.webkit.SslErrorHandler
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import com.example.edz.application.R
-import com.example.edz.application.databinding.ActivityWebViewBinding
+import com.example.edz.R
+import com.example.edz.databinding.ActivityWebViewBinding
 import com.mvvm.BaseMvvmActivity
 import com.mvvm.vm.BaseViewModel
 import kotlinx.android.synthetic.main.activity_web_view.*

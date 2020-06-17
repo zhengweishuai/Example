@@ -1,7 +1,7 @@
 package com.example.edz.ui.widget
 
 import android.content.Context
-import com.example.edz.application.R
+import com.example.edz.R
 import com.lxj.xpopup.core.CenterPopupView
 import kotlinx.android.synthetic.main.layout_popup_custom.view.*
 

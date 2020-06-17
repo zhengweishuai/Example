@@ -6,8 +6,8 @@ import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import androidx.lifecycle.Observer
-import com.example.edz.application.R
-import com.example.edz.application.databinding.ActivityLoginBinding
+import com.example.edz.R
+import com.example.edz.databinding.ActivityLoginBinding
 import com.example.edz.viewmodel.LoginViewModel
 import com.mvvm.BaseMvvmActivity
 import kotlinx.android.synthetic.main.activity_login.*

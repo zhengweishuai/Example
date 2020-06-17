@@ -1,7 +1,7 @@
 package com.example.edz.ui.fragment
 
-import com.example.edz.application.R
-import com.example.edz.application.databinding.FragmentDiscoverBinding
+import com.example.edz.R
+import com.example.edz.databinding.FragmentDiscoverBinding
 import com.example.edz.ui.adapter.DiscoverPageAdapter
 import com.example.edz.viewmodel.DiscoverViewModel
 import com.mvvm.BaseMvvmFragment

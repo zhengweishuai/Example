@@ -3,8 +3,8 @@ package com.example.edz.ui.adapter
 import android.content.Context
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
-import com.example.edz.application.R
-import com.example.edz.application.databinding.LayoutAdapterDiscoverArticleAuthorBinding
+import com.example.edz.R
+import com.example.edz.databinding.LayoutAdapterDiscoverArticleAuthorBinding
 import com.example.edz.bean.ArticleAuthorBean
 
 /**

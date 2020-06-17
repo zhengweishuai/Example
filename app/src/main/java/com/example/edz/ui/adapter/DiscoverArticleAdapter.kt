@@ -2,8 +2,8 @@ package com.example.edz.ui.adapter
 
 import android.content.Context
 import android.content.Intent
-import com.example.edz.application.R
-import com.example.edz.application.databinding.LayoutAdapterDiscoverArticleBinding
+import com.example.edz.R
+import com.example.edz.databinding.LayoutAdapterDiscoverArticleBinding
 import com.example.edz.bean.ArticleListItemBean
 import com.example.edz.ui.activity.WebViewActivity
 

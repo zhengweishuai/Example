@@ -1,8 +1,8 @@
 package com.example.edz.ui.fragment
 
-import com.example.edz.application.R
-import com.example.edz.application.databinding.FragmentSeriesBinding
-import com.example.edz.application.databinding.FragmentWxArticleBinding
+import com.example.edz.R
+import com.example.edz.databinding.FragmentSeriesBinding
+import com.example.edz.databinding.FragmentWxArticleBinding
 import com.example.edz.viewmodel.SeriesViewModel
 import com.example.edz.viewmodel.WxArticleViewModel
 import com.mvvm.BaseMvvmFragment
