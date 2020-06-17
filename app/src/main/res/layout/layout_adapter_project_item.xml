@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="projectItem"
+            type="com.example.edz.bean.ProjectDetailBean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/base_custom_popup_bg"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/project_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{projectItem.desc}"
+            android:textColor="@color/color_333333"
+            android:textSize="15sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tool:text="我是作者" />
+
+        <TextView
+            android:id="@+id/project_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@{projectItem.author}"
+            android:textColor="@color/color_666666"
+            android:textSize="14sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/project_author"
+            tool:text="这里是项目的介绍" />
+
+        <com.widget.RoundImageView
+            android:id="@+id/project_cover"
+            error="@{@drawable/project_default_img}"
+            imageUrl="@{projectItem.envelopePic}"
+            placeHolder="@{@drawable/project_default_img}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/project_desc" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

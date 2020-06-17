@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/base_recycler_item_press"
+        android:background="@drawable/base_press"
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 

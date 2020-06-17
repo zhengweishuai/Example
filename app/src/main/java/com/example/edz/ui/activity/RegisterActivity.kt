@@ -29,6 +29,7 @@ class RegisterActivity : BaseMvvmActivity<RegisterViewModel, ActivityRegisterBin
 
         //
         middle_title.text = "注册"
+        rl_left.setOnClickListener { finish() }
     }
 
     override fun doListener() {
@@ -63,7 +64,7 @@ class RegisterActivity : BaseMvvmActivity<RegisterViewModel, ActivityRegisterBin
         btn_register.setBackgroundResource(
                 if (!TextUtils.isEmpty(ed_name.text.toString()) &&
                         !TextUtils.isEmpty(ed_pwd.text.toString()) &&
-                        !TextUtils.isEmpty(ed_pwd.text.toString()))
+                        !TextUtils.isEmpty(ed_pwd_again.text.toString()))
                     R.drawable.base_shape_btn_selected else
                     R.drawable.base_shape_btn_default)
     }

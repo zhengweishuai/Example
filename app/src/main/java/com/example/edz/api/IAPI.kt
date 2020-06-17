@@ -40,4 +40,8 @@ interface IAPI {
     //公众号下的文章列表
     @GET()
     suspend fun wxArticleHistory(@Url url: String): INetResponse<HomeArticleListResponse>
+
+    //项目列表数据
+    @GET("project/list/1/json?cid=294")
+    suspend fun projectList(): INetResponse<ProjectListResponse>
 }

@@ -28,6 +28,6 @@ class LoginViewModel() : BaseViewModel() {
             UserDataUtil.putUserData(it)
             loginResponse.postValue(it)
         }, {
-        })
+        }, showLoading = true, showToast = true)
     }
 }

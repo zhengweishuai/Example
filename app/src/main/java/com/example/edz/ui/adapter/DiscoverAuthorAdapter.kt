@@ -15,17 +15,17 @@ import com.example.edz.bean.ArticleAuthorBean
  */
 class DiscoverAuthorAdapter(val context: Context, id: Int) :
         BaseAdapter<ArticleAuthorBean, LayoutAdapterDiscoverArticleAuthorBinding>(context, id) {
+    var clickItemPosition: Int = 0
     var mAuthor = MutableLiveData<ArticleAuthorBean>()
     override fun onBindVh(dataBinding: LayoutAdapterDiscoverArticleAuthorBinding?, holder: SupperViewHodel, position: Int) {
         holder.itemView.setBackgroundColor(
                 if (mList[position].select) ContextCompat.getColor(context, R.color.white)
                 else ContextCompat.getColor(context, R.color.color_f2f4f5))
         holder.itemView.setOnClickListener {
-            for (v in mList) {
-                v.select = false
-                mList[position].select = true
-                notifyDataSetChanged()
-            }
+            mList[clickItemPosition].select = false
+            mList[position].select = true
+            clickItemPosition = position
+            notifyDataSetChanged()
             mAuthor.postValue(mList[position])
         }
     }

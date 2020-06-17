@@ -11,6 +11,7 @@ import com.example.edz.application.databinding.ActivityLoginBinding
 import com.example.edz.viewmodel.LoginViewModel
 import com.mvvm.BaseMvvmActivity
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.layout_base_title.*
 
 /**
  * author : zhengweishuai
@@ -26,6 +27,8 @@ class LoginActivity : BaseMvvmActivity<LoginViewModel, ActivityLoginBinding>(), 
     override fun initViews() {
         mDataBind.vm = mViewModel
         mDataBind.click = ProxyClick()
+        middle_title.text = "登录"
+        rl_left.setOnClickListener { finish() }
     }
 
     override fun doListener() {

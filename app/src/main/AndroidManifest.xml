@@ -44,7 +44,10 @@
             android:name="design_height_in_dp"
             android:value="812" />
 
-        <activity android:name="com.example.edz.ui.activity.MainActivity">
+        <activity
+            android:name="com.example.edz.ui.activity.MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -67,6 +70,12 @@
         <!--        h5-->
         <activity
             android:name="com.example.edz.ui.activity.WebViewActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
+        <!--        设置-->
+        <activity
+            android:name="com.example.edz.ui.activity.SettingActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
     </application>

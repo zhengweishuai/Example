@@ -11,10 +11,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.base.BaseActivity;
 import com.base.R;
 import com.gyf.immersionbar.ImmersionBar;
 import com.utils.DensityUtil;
@@ -24,7 +24,7 @@ import com.widget.toast.ToastUtils;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public abstract class BaseMvpActivity<P extends IBasePresenter> extends BaseActivity {
+public abstract class BaseMvpActivity<P extends IBasePresenter> extends AppCompatActivity {
     private int activityCloseEnterAnimation;
     private int activityCloseExitAnimation;
     private int activityOpenEnterAnimation;
@@ -39,17 +39,42 @@ public abstract class BaseMvpActivity<P extends IBasePresenter> extends BaseActi
     private int loadingCount = 0;
     //沉浸式状态栏管理
     protected ImmersionBar immersionBar;
+    protected View mRootView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         obtainTheme();
         super.onCreate(savedInstanceState);
+        mRootView = LayoutInflater.from(this).inflate(attachLayoutRes(), null);
         //初始化沉浸式状态栏
         initStateBar();
         setContentView(generateContentView(mRootView));
         //绑定控件
         bind = ButterKnife.bind(this);
+        initViews();
+        doListener();
+        doBusiness();
     }
+
+    /**
+     * 绑定布局
+     */
+    abstract int attachLayoutRes();
+
+    /**
+     * 初始化视图控件
+     */
+    abstract void initViews();
+
+    /**
+     * 处理监听
+     */
+    abstract void doListener();
+
+    /**
+     * 处理业务
+     */
+    abstract void doBusiness();
 
     /**
      * 创建 Presenter

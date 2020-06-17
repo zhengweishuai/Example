@@ -99,7 +99,7 @@ class HomeFragment : BaseMvvmFragment<HomeViewModel, FragmentHomeBinding>() {
                         .show()
             }
         }
-        vp_banner.setOnTouchListener(OnTouchListener { v, event ->
+        vp_banner.setOnTouchListener(OnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     mHandler.removeCallbacks(mVpRun)

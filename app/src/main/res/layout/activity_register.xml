@@ -70,7 +70,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="30dp"
             android:layout_marginRight="30dp"
-            android:background="@drawable/base_shape_btn_default"
+            android:background="@drawable/base_selector_btn"
             android:onClick="@{()->click.toRegister()}"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="280dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/base_custom_popup_bg">
+
+    <TextView
+        android:id="@+id/popup_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/color_333333"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tool:text="提示" />
+
+    <TextView
+        android:id="@+id/popup_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:textColor="@color/color_333333"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/popup_title"
+        tool:text="提示一些内容" />
+
+    <View
+        android:id="@+id/hor_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/color_f2f4f5"
+        app:layout_constraintTop_toBottomOf="@id/popup_content" />
+
+    <TextView
+        android:id="@+id/popup_left"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:textColor="@color/color_d81e06"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/popup_right"
+        app:layout_constraintTop_toBottomOf="@+id/hor_line"
+        tool:text="提示" />
+
+    <View
+        android:id="@+id/v_line"
+        android:layout_width="1dp"
+        android:layout_height="40dp"
+        android:background="@color/color_f2f4f5"
+        app:layout_constraintLeft_toRightOf="@id/popup_left"
+        app:layout_constraintTop_toBottomOf="@id/hor_line" />
+
+    <TextView
+        android:id="@+id/popup_right"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="1dp"
+        android:gravity="center"
+        android:textColor="@color/color_d81e06"
+        android:textSize="16sp"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toRightOf="@id/popup_left"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hor_line"
+        tool:text="提示" />
+</androidx.constraintlayout.widget.ConstraintLayout>

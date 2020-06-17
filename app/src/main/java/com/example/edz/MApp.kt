@@ -56,9 +56,9 @@ class MApp : Application() {
         //static 代码段可以防止内存泄露
         init {
             //设置全局的Header构建器
-            SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout -> ClassicsHeader(context) }
+            SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, _ -> ClassicsHeader(context) }
             //设置全局的Footer构建器
-            SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout -> ClassicsFooter(context).setDrawableSize(20f) }
+            SmartRefreshLayout.setDefaultRefreshFooterCreator { context, _ -> ClassicsFooter(context).setDrawableSize(20f) }
         }
     }
 }
