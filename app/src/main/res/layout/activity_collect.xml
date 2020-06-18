@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="articleAdapter"
+            type="com.example.edz.ui.adapter.DiscoverArticleAdapter" />
+
+        <variable
+            name="articleManager"
+            type="androidx.recyclerview.widget.LinearLayoutManager" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/layout_base_title" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rl_collect"
+            adapter="@{articleAdapter}"
+            layoutManager="@{articleManager}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</layout>

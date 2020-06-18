@@ -38,10 +38,18 @@ interface IAPI {
     suspend fun wxarticle(): INetResponse<ArrayList<ArticleAuthorBean>>
 
     //公众号下的文章列表
-    @GET()
+    @GET
     suspend fun wxArticleHistory(@Url url: String): INetResponse<HomeArticleListResponse>
 
     //项目列表数据
     @GET("project/list/1/json?cid=294")
     suspend fun projectList(): INetResponse<ProjectListResponse>
+
+    //收藏站内文章
+    @POST
+    suspend fun collectArticle(@Url url: String): INetResponse<Any>
+
+    //收藏站内文章
+    @GET
+    suspend fun collectArticleList(@Url url: String): INetResponse<HomeArticleListResponse>
 }

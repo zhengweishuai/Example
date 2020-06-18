@@ -1,5 +1,7 @@
 package com.example.edz.bean
 
+import java.io.Serializable
+
 /**
  * author : zhengweishuai
  * date : 2020/6/11 0011.
@@ -9,4 +11,4 @@ package com.example.edz.bean
 data class ArticleListItemBean(var id: Int?,
                                var title: String,
                                var link: String,
-                               var niceDate:String)
+                               var niceDate: String) : Serializable

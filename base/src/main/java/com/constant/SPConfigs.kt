@@ -1,4 +1,4 @@
-package com.example.edz.constant
+package com.constant
 
 /**
  * author : zhengweishuai
@@ -9,4 +9,8 @@ package com.example.edz.constant
 object SPConfigs {
     //用户信息
     const val USER_DATA = "current_user_data"
+    //当前用户账号
+    const val USER_ACCOUNT = "current_user_account"
+    //当前用户密码
+    const val USER_PASSWORD = "current_user_password"
 }

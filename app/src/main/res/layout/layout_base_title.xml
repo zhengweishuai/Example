@@ -53,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:textColor="@color/color_333333"
+            android:textColor="@color/color_d81e06"
             android:textSize="15sp"
             tool:text="编辑" />
     </RelativeLayout>

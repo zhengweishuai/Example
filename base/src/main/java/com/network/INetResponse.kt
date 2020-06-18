@@ -8,4 +8,4 @@ package com.network
  */
 data class INetResponse<T>(var errorCode: Int,
                            var errorMsg: String,
-                           var data: T)
+                           var data: T? = null)

@@ -1,5 +1,7 @@
 package com.network
 
+import com.constant.SPConfigs
+import com.utils.SPUtils
 import okhttp3.Interceptor
 import okhttp3.Response
 
@@ -12,6 +14,12 @@ import okhttp3.Response
 class HeadInterceptor(var heads: MutableMap<String, String>) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request().newBuilder()
+        val userName = SPUtils.getPreferences(SPConfigs.USER_ACCOUNT, "")
+        val userPsd = SPUtils.getPreferences(SPConfigs.USER_PASSWORD, "")
+        request.addHeader("Cookie",
+                "loginUserName=$userName")
+        request.addHeader("Cookie",
+                "loginUserPassword=$userPsd")
         val keys = heads.keys
         for (k in keys) {
             heads[k]?.run {

@@ -1,4 +1,4 @@
-package com.example.edz.constant
+package com.constant
 
 /**
  * author : zhengweishuai

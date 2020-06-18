@@ -17,7 +17,7 @@ import kotlinx.coroutines.withContext
  */
 fun <T> BaseViewModel.request(
         block: suspend () -> INetResponse<T>?,
-        success: (T) -> Unit,
+        success: (T?) -> Unit,
         failure: (Throwable) -> Unit = {},
         showLoading: Boolean = false,
         showToast: Boolean = false) {
@@ -26,8 +26,8 @@ fun <T> BaseViewModel.request(
         if (showLoading) this@request.showLoading()
         runCatching {
             withContext(Dispatchers.IO) { block() }
-        }.onSuccess {
-            it?.let {
+        }.onSuccess { iNetResponse ->
+            iNetResponse?.let {
                 if (it.errorCode == NeworkConstant.INET_REQUEST_SUCCESS) {
                     success(it.data)
                 } else if (showToast) {

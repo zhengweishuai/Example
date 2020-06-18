@@ -1,8 +1,8 @@
 package com.example.edz.utils
 
 import android.text.TextUtils
+import com.constant.SPConfigs
 import com.example.edz.bean.UserBean
-import com.example.edz.constant.SPConfigs
 import com.google.gson.Gson
 import com.utils.SPUtils
 
@@ -32,7 +32,7 @@ object UserDataUtil {
     /*
     清除本地的用户信息
      */
-    fun clearUserData(){
+    fun clearUserData() {
         SPUtils.removePreferences(SPConfigs.USER_DATA)
     }
 }

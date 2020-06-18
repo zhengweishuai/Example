@@ -21,9 +21,11 @@ class HomeViewModel : BaseViewModel() {
         request({
             NetworkHelper.newInstance().banners()
         }, {
-            it.add(it.size, it[0])
-            it.add(0, it[it.size - 2])
-            bannerData.postValue(it)
+            it?.let {
+                it.add(it.size, it[0])
+                it.add(0, it[it.size - 2])
+                bannerData.postValue(it)
+            }
         }, {
 
         })
@@ -33,7 +35,7 @@ class HomeViewModel : BaseViewModel() {
         val url = "article/list/$pageNum/json"
         request({ NetworkHelper.newInstance().homeArticleList(url) },
                 {
-                    articleData.postValue(it.datas)
+                    articleData.postValue(it?.datas)
                 },
                 {
 

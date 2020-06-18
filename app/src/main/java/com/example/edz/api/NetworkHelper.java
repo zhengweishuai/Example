@@ -1,6 +1,6 @@
 package com.example.edz.api;
 
-import com.example.edz.constant.AppConfigs;
+import com.constant.AppConfigs;
 import com.network.BaseNetwork;
 
 /**

@@ -18,7 +18,7 @@ class ProjectViewModel : BaseViewModel() {
         request({
             NetworkHelper.newInstance().projectList()
         }, {
-            projectList.postValue(it.datas)
+            projectList.postValue(it?.datas)
         }, {
 
         }, showLoading = true)

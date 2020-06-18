@@ -3,6 +3,7 @@ package com.example.edz.ui.widget
 import android.content.Context
 import android.content.Intent
 import com.example.edz.R
+import com.example.edz.ui.activity.CollectActivity
 import com.example.edz.ui.activity.SettingActivity
 import com.example.edz.utils.UserDataUtil
 import com.lxj.xpopup.core.DrawerPopupView
@@ -23,7 +24,7 @@ class PersionalPopup(context: Context) : DrawerPopupView(context) {
             user_name.text = it.nickname
         }
         collection.setOnClickListener {
-
+            context.startActivity(Intent(context, CollectActivity::class.java))
         }
         share.setOnClickListener {
 

@@ -79,7 +79,6 @@ class HomeFragment : BaseMvvmFragment<HomeViewModel, FragmentHomeBinding>() {
             override fun onRefresh(refreshLayout: RefreshLayout) {
                 refreshLayout.resetNoMoreData()
                 pageNum = 1
-                mViewModel.requestBanners()
                 mViewModel.requestArticleList(pageNum)
             }
 
@@ -143,6 +142,7 @@ class HomeFragment : BaseMvvmFragment<HomeViewModel, FragmentHomeBinding>() {
     }
 
     override fun doBusiness() {
+        mViewModel.requestBanners()
         refresh_view.autoRefresh()
     }
 

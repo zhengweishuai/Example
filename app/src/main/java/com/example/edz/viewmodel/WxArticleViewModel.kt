@@ -32,7 +32,7 @@ class WxArticleViewModel : BaseViewModel() {
             val url = "wxarticle/list/$id/$page/json"
             NetworkHelper.newInstance().wxArticleHistory(url)
         }, {
-            articles.postValue(it.datas)
+            articles.postValue(it?.datas)
         }, {
             it.message?.let { it1 -> showToast(it1) }
         }, true)

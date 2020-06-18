@@ -9,9 +9,10 @@ import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.example.edz.R
+import com.example.edz.bean.ArticleListItemBean
 import com.example.edz.databinding.ActivityWebViewBinding
+import com.example.edz.viewmodel.WebViewModel
 import com.mvvm.BaseMvvmActivity
-import com.mvvm.vm.BaseViewModel
 import kotlinx.android.synthetic.main.activity_web_view.*
 import kotlinx.android.synthetic.main.layout_base_title.*
 
@@ -21,13 +22,17 @@ import kotlinx.android.synthetic.main.layout_base_title.*
  * e-mail : zhengws@chinacarbon-al.com
  * description ：
  */
-class WebViewActivity : BaseMvvmActivity<BaseViewModel, ActivityWebViewBinding>() {
+class WebViewActivity : BaseMvvmActivity<WebViewModel, ActivityWebViewBinding>() {
+    private val articleBean: ArticleListItemBean by lazy {
+        intent.extras?.getSerializable("articleBean") as ArticleListItemBean
+    }
     override fun attachLayoutRes(): Int = R.layout.activity_web_view
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun initViews() {
+        tv_right.text = "收藏"
         showLoading(true)
-        val url: String = intent.getStringExtra("url")
+        val url: String = articleBean.link
         val settings = wb.settings
         settings.javaScriptEnabled = true//设置WebView属性，能够执行Javascript脚本
         settings.cacheMode = WebSettings.LOAD_NO_CACHE
@@ -70,6 +75,9 @@ class WebViewActivity : BaseMvvmActivity<BaseViewModel, ActivityWebViewBinding>(
 
         rl_left.setOnClickListener {
             finish()
+        }
+        rl_right.setOnClickListener {
+            mViewModel.collectArticle(articleBean.id)
         }
     }
 

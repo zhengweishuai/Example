@@ -1,11 +1,13 @@
 package com.example.edz.viewmodel
 
 import androidx.lifecycle.MutableLiveData
+import com.constant.SPConfigs
 import com.example.edz.api.NetworkHelper
 import com.example.edz.bean.UserBean
 import com.example.edz.utils.UserDataUtil
 import com.mvvm.vm.BaseViewModel
 import com.mvvm.vm.request
+import com.utils.SPUtils
 
 /**
  * author : zhengweishuai
@@ -25,8 +27,12 @@ class LoginViewModel() : BaseViewModel() {
             NetworkHelper.newInstance().login(map)
         }, {
             //保存用户信息到本地
-            UserDataUtil.putUserData(it)
-            loginResponse.postValue(it)
+            SPUtils.putPreferences(SPConfigs.USER_ACCOUNT, name)
+            SPUtils.putPreferences(SPConfigs.USER_PASSWORD, pwd)
+            it?.let {
+                UserDataUtil.putUserData(it)
+                loginResponse.postValue(it)
+            }
         }, {
         }, showLoading = true, showToast = true)
     }

@@ -18,6 +18,7 @@ import com.example.edz.bean.BannerBean
 class HomeBannerAdapter(private val context: Context) : PagerAdapter() {
     var mList = mutableListOf<BannerBean>()
     fun addData(list: MutableList<BannerBean>) {
+        this.mList.clear()
         this.mList = list
     }
 
