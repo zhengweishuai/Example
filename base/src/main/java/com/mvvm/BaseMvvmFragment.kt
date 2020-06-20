@@ -48,7 +48,6 @@ abstract class BaseMvvmFragment<vm : BaseViewModel, db : ViewDataBinding> : Frag
     }
 
     override fun onDestroyView() {
-        LogUtil.d("------------------>onDestroyView" + this.javaClass.simpleName)
         isLoad = false
         super.onDestroyView()
     }

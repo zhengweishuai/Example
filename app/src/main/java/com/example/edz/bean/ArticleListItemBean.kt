@@ -8,7 +8,8 @@ import java.io.Serializable
  * e-mail : zhengws@chinacarbon-al.com
  * description ：
  */
-data class ArticleListItemBean(var id: Int?,
+data class ArticleListItemBean(var id: Int,
+                               var originId: Int = -1,
                                var title: String,
                                var link: String,
                                var niceDate: String) : Serializable

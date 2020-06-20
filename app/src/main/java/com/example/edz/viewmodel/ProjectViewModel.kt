@@ -21,6 +21,6 @@ class ProjectViewModel : BaseViewModel() {
             projectList.postValue(it?.datas)
         }, {
 
-        }, showLoading = true)
+        }, showLoading = false)
     }
 }

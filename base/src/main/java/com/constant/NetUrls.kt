@@ -11,4 +11,6 @@ object NetUrls {
     const val COLLECT_ARTICLE = "lg/collect/"
     //已收藏的文章列表
     const val COLLECT_ARTICLE_LIST = "lg/collect/list/"
+    //已收藏的文章列表
+    const val CANCEL_COLLECT_ARTICLE = "lg/uncollect/"
 }

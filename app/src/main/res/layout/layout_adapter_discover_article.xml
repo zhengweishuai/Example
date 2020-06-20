@@ -10,48 +10,69 @@
             type="com.example.edz.bean.ArticleListItemBean" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.widget.SwipeMenuView
+        android:id="@+id/swipe_menu"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/base_press"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/article_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:singleLine="true"
-            android:text="@{data.title}"
-            android:textColor="@color/color_333333"
-            android:textSize="14sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tool:text="5 道刁钻的 Activity 生命周期面试题" />
-
-        <TextView
-            android:id="@+id/article_update_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/article_update_icon"
-            android:drawablePadding="10dp"
-            android:paddingBottom="10dp"
-            android:text="@{data.niceDate}"
-            android:textColor="@color/color_666666"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/article_title"
-            tool:text="一天前" />
-
-        <View
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/content_layout"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/color_19000000"
-            app:layout_constraintTop_toBottomOf="@+id/article_update_time" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_height="wrap_content"
+            android:background="@drawable/base_press"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:id="@+id/article_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:singleLine="true"
+                android:text="@{data.title}"
+                android:textColor="@color/color_333333"
+                android:textSize="14sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tool:text="5 道刁钻的 Activity 生命周期面试题" />
+
+            <TextView
+                android:id="@+id/article_update_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/article_update_icon"
+                android:drawablePadding="10dp"
+                android:paddingBottom="10dp"
+                android:text="@{data.niceDate}"
+                android:textColor="@color/color_666666"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/article_title"
+                tool:text="一天前" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_19000000"
+                app:layout_constraintTop_toBottomOf="@+id/article_update_time" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:id="@+id/tv_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/color_d81e06"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="删除"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+    </com.widget.SwipeMenuView>
+
 </layout>

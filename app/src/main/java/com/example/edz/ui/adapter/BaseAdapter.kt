@@ -55,16 +55,18 @@ abstract class BaseAdapter<T, DB : ViewDataBinding>(val mContext: Context, val b
     }
 
     fun removeItem(data: T) {
-        mList.remove(data)
         val position = mList.indexOf(data)
         if (-1 == position) {
             return
         }
+        mList.remove(data)
         notifyItemRemoved(position)
+        notifyItemRangeChanged(position, mList.size - position)
     }
 
     fun removeItem(pos: Int) {
         mList.removeAt(pos)
         notifyItemRemoved(pos)
+        notifyItemRangeChanged(pos, mList.size - pos)
     }
 }

@@ -1,12 +1,7 @@
 package com.mvvm
 
-import android.animation.ObjectAnimator
-import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -15,12 +10,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.base.R
 import com.gyf.immersionbar.ktx.immersionBar
+import com.lxj.xpopup.XPopup
+import com.lxj.xpopup.animator.EmptyAnimator
 import com.mvvm.vm.BaseViewModel
 import com.mvvm.vm.ViewModelConstant
-import com.utils.LogUtil
 import com.utils.getClazz
+import com.widget.LoadingPopu
 import com.widget.toast.ToastUtils
-import kotlinx.android.synthetic.main.layout_base_loading.*
 
 /**
  * author : zhengweishuai
@@ -87,11 +83,9 @@ abstract class BaseMvvmActivity<vm : BaseViewModel, db : ViewDataBinding> : AppC
         mViewModel.vmLiveData.observe(this, Observer {
             when (it.action) {
                 ViewModelConstant.ACTION_SHOW_LOADING -> {
-                    LogUtil.d("显示loading")
                     showLoading(true)
                 }
                 ViewModelConstant.ACTION_HIDE_LOADING -> {
-                    LogUtil.d("隐藏loading")
                     showLoading(false)
                 }
                 ViewModelConstant.ACTION_SHOW_TOAST -> {
@@ -125,7 +119,6 @@ abstract class BaseMvvmActivity<vm : BaseViewModel, db : ViewDataBinding> : AppC
     abstract fun doBusiness()
 
     override fun onDestroy() {
-        showLoading(false)
         mDataBind.unbind()
         super.onDestroy()
     }
@@ -134,36 +127,19 @@ abstract class BaseMvvmActivity<vm : BaseViewModel, db : ViewDataBinding> : AppC
         ToastUtils.show(msg)
     }
 
-    private var loadCount = 0
-    private var loadingLayout: View? = null
+    private var loadingPopu: LoadingPopu? = null
     fun showLoading(show: Boolean) {
-        if (loadingLayout == null) {
-            loadingLayout = LayoutInflater.from(this).inflate(R.layout.layout_base_loading, null)
+        if (loadingPopu == null) {
+            loadingPopu = LoadingPopu(this)
         }
-        val viewGroup = mDataBind.root as? ViewGroup
-        if (show) {
-            if (loadCount == 0) {
-                viewGroup?.addView(loadingLayout, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-                loadCount++
-                startRotate(loading)
-            }
-        } else {
-            if (loadCount > 0) {
-                viewGroup?.removeView(loadingLayout)
-            }
-            loadCount = 0
+        if (show && !loadingPopu!!.isShown) {
+            XPopup.Builder(this)
+                    .customAnimator(EmptyAnimator())
+                    .asCustom(loadingPopu)
+                    .show()
         }
-    }
-
-    /**
-     * 旋转动画
-     */
-    @SuppressLint("WrongConstant")
-    private fun startRotate(view: View) {
-        val rotateAnimator = ObjectAnimator.ofFloat(view, "rotation", 0f, 360f)
-        rotateAnimator.duration = 1000
-        rotateAnimator.repeatMode = ValueAnimator.INFINITE
-        rotateAnimator.repeatCount = ValueAnimator.INFINITE
-        rotateAnimator.start()
+        if (!show) {
+            loadingPopu!!.dismiss()
+        }
     }
 }

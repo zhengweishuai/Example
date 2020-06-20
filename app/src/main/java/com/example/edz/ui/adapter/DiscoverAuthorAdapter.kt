@@ -22,11 +22,13 @@ class DiscoverAuthorAdapter(val context: Context, id: Int) :
                 if (mList[position].select) ContextCompat.getColor(context, R.color.white)
                 else ContextCompat.getColor(context, R.color.color_f2f4f5))
         holder.itemView.setOnClickListener {
-            mList[clickItemPosition].select = false
-            mList[position].select = true
-            clickItemPosition = position
-            notifyDataSetChanged()
-            mAuthor.postValue(mList[position])
+            if (clickItemPosition != position){
+                mList[clickItemPosition].select = false
+                mList[position].select = true
+                clickItemPosition = position
+                notifyDataSetChanged()
+                mAuthor.postValue(mList[position])
+            }
         }
     }
 

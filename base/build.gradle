@@ -78,4 +78,5 @@ dependencies {
     api "com.scwang.smart:refresh-layout-kernel:$rootProject.refresh"
     api "com.scwang.smart:refresh-footer-classics:$rootProject.refresh"
     api "com.scwang.smart:refresh-header-classics:$rootProject.refresh"
+    api "com.lxj:xpopup:$rootProject.xpopup"
 }

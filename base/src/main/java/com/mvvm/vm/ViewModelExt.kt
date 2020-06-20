@@ -17,7 +17,7 @@ import kotlinx.coroutines.withContext
  */
 fun <T> BaseViewModel.request(
         block: suspend () -> INetResponse<T>?,
-        success: (T?) -> Unit,
+        success: (T?) -> Unit = {},
         failure: (Throwable) -> Unit = {},
         showLoading: Boolean = false,
         showToast: Boolean = false) {

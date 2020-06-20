@@ -24,7 +24,7 @@ class WxArticleViewModel : BaseViewModel() {
             authors.postValue(it)
         }, {
             it.message?.let { it1 -> showToast(it1) }
-        })
+        }, showLoading = true)
     }
 
     fun requestArticles(id: Int, page: Int) {
@@ -35,6 +35,6 @@ class WxArticleViewModel : BaseViewModel() {
             articles.postValue(it?.datas)
         }, {
             it.message?.let { it1 -> showToast(it1) }
-        }, true)
+        }, showLoading = true)
     }
 }

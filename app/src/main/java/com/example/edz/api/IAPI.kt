@@ -49,7 +49,11 @@ interface IAPI {
     @POST
     suspend fun collectArticle(@Url url: String): INetResponse<Any>
 
-    //收藏站内文章
+    //我的收藏
     @GET
     suspend fun collectArticleList(@Url url: String): INetResponse<HomeArticleListResponse>
+
+    //取消收藏
+    @POST
+    suspend fun cancelCollectArticle(@Url url: String): INetResponse<Any>
 }

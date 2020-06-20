@@ -70,7 +70,6 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
     implementation "me.jessyan:autosize:$rootProject.autoSize"
-    implementation "com.lxj:xpopup:$rootProject.xpopup"
     //检测内存泄露
 //    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.2'
 //    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'

@@ -25,4 +25,12 @@ class CollectViewModel : BaseViewModel() {
             articles.postValue(it?.datas)
         }, showLoading = true, showToast = true)
     }
+
+    fun cancleCollectArticle(id: Int, orginId: Int) {
+        showToast("暂时不能移除收藏")
+//        request({
+//            val url = NetUrls.CANCEL_COLLECT_ARTICLE + id + "/originId/" + orginId + "/json"
+//            NetworkHelper.newInstance().cancelCollectArticle(url)
+//        })
+    }
 }

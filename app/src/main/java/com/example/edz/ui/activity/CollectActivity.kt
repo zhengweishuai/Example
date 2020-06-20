@@ -26,14 +26,15 @@ class CollectActivity : BaseMvvmActivity<CollectViewModel, ActivityCollectBindin
     override fun initViews() {
         middle_title.text = "我的收藏"
         mDataBind.articleManager = LinearLayoutManager(this)
-        mDataBind.articleAdapter = DiscoverArticleAdapter(this, BR.data).apply {
+        mDataBind.articleAdapter = DiscoverArticleAdapter(this, BR.data, true).apply {
             mViewModel.articles.observe(this@CollectActivity, Observer {
                 addList(it)
             })
+            this.deletePos.observe(this@CollectActivity, Observer {
+                mViewModel.cancleCollectArticle(mList[it].id, mList[it].originId)
+                removeItem(it)
+            })
         }
-        val touchHelperCallback = ItemTouchHelperCallback()
-        val itemTouchHelper: ItemTouchHelper = ItemTouchHelper(touchHelperCallback)
-        itemTouchHelper.attachToRecyclerView(rl_collect)
     }
 
     override fun doListener() {

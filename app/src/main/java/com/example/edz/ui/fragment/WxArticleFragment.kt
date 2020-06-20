@@ -9,6 +9,7 @@ import com.example.edz.ui.adapter.DiscoverArticleAdapter
 import com.example.edz.ui.adapter.DiscoverAuthorAdapter
 import com.example.edz.viewmodel.WxArticleViewModel
 import com.mvvm.BaseMvvmFragment
+import kotlinx.android.synthetic.main.fragment_wx_article.*
 
 /**
  * author : zhengweishuai
@@ -28,6 +29,9 @@ class WxArticleFragment : BaseMvvmFragment<WxArticleViewModel, FragmentWxArticle
                     it[0].select = true
                     setNewData(it)
                     mViewModel.requestArticles(it[0].id, pageNum)
+                    swipe_refresh_view.setOnRefreshListener {
+                        mViewModel.requestArticles(it[0].id, pageNum)
+                    }
                 }
             })
             mAuthor.observe(this@WxArticleFragment, Observer {
@@ -39,11 +43,13 @@ class WxArticleFragment : BaseMvvmFragment<WxArticleViewModel, FragmentWxArticle
         mDataBind.articleAdapter = DiscoverArticleAdapter(requireActivity(), BR.data).apply {
             mViewModel.articles.observe(this@WxArticleFragment, Observer {
                 setNewData(it)
+                swipe_refresh_view.isRefreshing = false;
             })
         }
     }
 
     override fun initListener() {
+
     }
 
     override fun doBusiness() {
