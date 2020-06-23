@@ -24,7 +24,16 @@
 -keep public class * extends android.preference.Preference
 -keep public class * extends android.view.View
 -keep public class com.android.vending.licensing.ILicensingService
--keep cl ass android.support.** {*;}
+-keep class android.support.** {*;}
+#androidx
+-keep class com.google.android.material.** {*;}
+-keep class androidx.** {*;}
+-keep public class * extends androidx.**
+-keep interface androidx.** {*;}
+-dontwarn com.google.android.material.**
+-dontnote com.google.android.material.**
+-dontwarn androidx.**
+
 
 -keepclasseswithmembernames class * {
     native <methods>;
@@ -84,6 +93,14 @@
     public void *(android.webkit.webView, jav.lang.String);
 }
 ########################公共部分end###############################
+#databing
+-dontwarn android.databinding.**
+-keep class android.databinding.** { *; }
+# 实体类
+ # common 的混淆代码
+-keep class com.example.edz.bean.** {
+    *;
+ }
 #butterknife
 -keep class butterknife.** { *; }
 -dontwarn butterknife.internal.**
@@ -134,3 +151,7 @@
 -keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
     rx.internal.util.atomic.LinkedQueueNode consumerNode;
 }
+
+#xpopup
+-dontwarn com.lxj.xpopup.widget.**
+-keep class com.lxj.xpopup.widget.**{*;}

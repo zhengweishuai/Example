@@ -10,7 +10,8 @@
         android:id="@+id/user_head"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="50dp" />
+        android:layout_marginTop="50dp"
+        android:src="@drawable/project_default_img" />
 
     <TextView
         android:id="@+id/user_name"

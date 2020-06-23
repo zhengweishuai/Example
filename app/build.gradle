@@ -3,6 +3,8 @@ apply plugin: 'kotlin-android'
 apply plugin:'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 android {
+    def API_HOST_PRODUCT = "\"https://api.pinlaninfo.com/\""
+    def API_HOST_DEVELOP = "\"http:192.168.3.125:9024/\""
     dataBinding{
         enabled = true
     }
@@ -50,6 +52,7 @@ android {
             shrinkResources true // 移除无用的resource文件
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField ("String", "API_HOST", "${API_HOST_PRODUCT}")
         }
         debug {
             minifyEnabled false
@@ -57,6 +60,7 @@ android {
             shrinkResources false  // 移除无用的resource文件
             signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField ("String", "API_HOST", "${API_HOST_DEVELOP}")
         }
     }
 }

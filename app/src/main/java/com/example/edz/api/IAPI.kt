@@ -2,6 +2,7 @@ package com.example.edz.api
 
 import com.example.edz.bean.*
 import com.network.INetResponse
+import io.reactivex.Observable
 import retrofit2.http.*
 
 /**
@@ -54,6 +55,12 @@ interface IAPI {
     suspend fun collectArticleList(@Url url: String): INetResponse<HomeArticleListResponse>
 
     //取消收藏
-    @POST
-    suspend fun cancelCollectArticle(@Url url: String): INetResponse<Any>
+    @POST("/lg/uncollect_originId/{id}/json")
+    suspend fun cancelCollectArticle(@Path("id") id: Int): INetResponse<Any>
+
+    /**
+     * 取消收藏
+     */
+    @POST("/lg/uncollect/{id}/json")
+    suspend fun cancelCollectArticle(@Path("id") id: Int, @Query("originId") originId: Int): INetResponse<Any>
 }

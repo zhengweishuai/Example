@@ -2,11 +2,12 @@ package com.example.edz.ui.fragment
 
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.edz.R
 import com.example.edz.BR
+import com.example.edz.R
 import com.example.edz.databinding.FragmentWxArticleBinding
 import com.example.edz.ui.adapter.DiscoverArticleAdapter
 import com.example.edz.ui.adapter.DiscoverAuthorAdapter
+import com.example.edz.utils.EndlessRecyclerOnScrollListener
 import com.example.edz.viewmodel.WxArticleViewModel
 import com.mvvm.BaseMvvmFragment
 import kotlinx.android.synthetic.main.fragment_wx_article.*
@@ -44,6 +45,11 @@ class WxArticleFragment : BaseMvvmFragment<WxArticleViewModel, FragmentWxArticle
             mViewModel.articles.observe(this@WxArticleFragment, Observer {
                 setNewData(it)
                 swipe_refresh_view.isRefreshing = false;
+            })
+            rl_aiticle.addOnScrollListener(object :EndlessRecyclerOnScrollListener(){
+                override fun onLoadMore() {
+                    this@apply.setLoadState(LOADING)
+                }
             })
         }
     }

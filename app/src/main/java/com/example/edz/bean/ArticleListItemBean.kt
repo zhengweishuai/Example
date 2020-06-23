@@ -12,4 +12,5 @@ data class ArticleListItemBean(var id: Int,
                                var originId: Int = -1,
                                var title: String,
                                var link: String,
+                               var collect: Boolean,
                                var niceDate: String) : Serializable

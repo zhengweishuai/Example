@@ -1,16 +1,17 @@
 package com.example.edz.ui.activity
 
+import android.app.Activity
+import android.content.Intent
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.constant.AppStaticRes
 import com.example.edz.BR
 import com.example.edz.R
+import com.example.edz.bean.ArticleListItemBean
 import com.example.edz.databinding.ActivityCollectBinding
 import com.example.edz.ui.adapter.DiscoverArticleAdapter
-import com.example.edz.utils.ItemTouchHelperCallback
 import com.example.edz.viewmodel.CollectViewModel
 import com.mvvm.BaseMvvmActivity
-import kotlinx.android.synthetic.main.activity_collect.*
 import kotlinx.android.synthetic.main.layout_base_title.*
 
 
@@ -43,5 +44,15 @@ class CollectActivity : BaseMvvmActivity<CollectViewModel, ActivityCollectBindin
 
     override fun doBusiness() {
         mViewModel.requsetCollectArticle(0)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == AppStaticRes.ARTICLE_DETAIL_CODE && resultCode == Activity.RESULT_OK) {
+            data?.let {
+                val articleListItemBean = it.getSerializableExtra("articleBean") as ArticleListItemBean
+                mDataBind.articleAdapter?.removeItem(articleListItemBean)
+            }
+        }
     }
 }
