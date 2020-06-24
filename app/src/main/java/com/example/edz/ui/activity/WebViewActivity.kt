@@ -2,18 +2,20 @@ package com.example.edz.ui.activity
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.net.http.SslError
 import android.os.Build
-import android.os.Bundle
 import android.text.TextUtils
 import android.webkit.SslErrorHandler
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.constant.AppStaticRes
 import com.example.edz.R
-import com.example.edz.bean.ArticleListItemBean
 import com.example.edz.databinding.ActivityWebViewBinding
 import com.example.edz.viewmodel.WebViewModel
 import com.mvvm.BaseMvvmActivity
@@ -27,18 +29,50 @@ import kotlinx.android.synthetic.main.layout_base_title.*
  * description ：
  */
 class WebViewActivity : BaseMvvmActivity<WebViewModel, ActivityWebViewBinding>() {
-    private val articleBean: ArticleListItemBean by lazy {
-        intent.extras?.getSerializable("articleBean") as ArticleListItemBean
+    private var url: String = ""
+    private var isCollect = false
+    private var originId: Int = 0
+    private var id: Int = 0
+
+
+    /**
+     * url 链接
+     * id 当前id
+     * originId 可不传
+     * isCollect 收藏状态
+     */
+    companion object {
+        fun start(context: Context, url: String, id: Int, originId: Int, isCollect: Boolean) {
+            val starter = Intent(context, WebViewActivity::class.java)
+            starter.putExtra("web_url", url)
+            starter.putExtra("id", id)
+            starter.putExtra("originId", originId)
+            starter.putExtra("is_collect", isCollect)
+            if (context is AppCompatActivity) {
+                context.startActivityForResult(starter, AppStaticRes.ARTICLE_DETAIL_CODE)
+            }
+        }
+
+        fun start(context: Fragment, url: String, id: Int, originId: Int, isCollect: Boolean) {
+            val starter = Intent(context.requireContext(), WebViewActivity::class.java)
+            starter.putExtra("web_url", url)
+            starter.putExtra("id", id)
+            starter.putExtra("originId", originId)
+            starter.putExtra("is_collect", isCollect)
+            context.startActivityForResult(starter, AppStaticRes.ARTICLE_DETAIL_CODE)
+        }
     }
-    private var isUnCollect = false
 
     override fun attachLayoutRes(): Int = R.layout.activity_web_view
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun initViews() {
-        iv_right.setBackgroundResource(if (articleBean.collect) R.drawable.collect_select else R.drawable.collect_default)
+        url = intent.extras?.getString("web_url").toString()
+        id = intent.extras?.getInt("id")!!
+        originId = intent.extras?.getInt("originId")!!
+        isCollect = intent.extras?.getBoolean("is_collect")!!
+        iv_right.setBackgroundResource(if (isCollect) R.drawable.collect_select else R.drawable.collect_default)
         showLoading(true)
-        val url: String = articleBean.link
         val settings = wb.settings
         settings.javaScriptEnabled = true//设置WebView属性，能够执行Javascript脚本
         settings.cacheMode = WebSettings.LOAD_NO_CACHE
@@ -80,33 +114,28 @@ class WebViewActivity : BaseMvvmActivity<WebViewModel, ActivityWebViewBinding>()
         }
 
         rl_left.setOnClickListener {
-            finish()
+            onBackPressed()
         }
         rl_right.setOnClickListener {
-            if (articleBean.collect) {
-                mViewModel.unCollectArticle(articleBean.id, articleBean.originId)
+            if (isCollect) {
+                mViewModel.unCollectArticle(id, originId)
             } else {
-                mViewModel.collectArticle(articleBean.id)
+                mViewModel.collectArticle(id)
             }
         }
     }
 
     override fun doBusiness() {
-        mViewModel.unCollect.observe(this, Observer {
-            isUnCollect = it
-            iv_right.setBackgroundResource(if (it) R.drawable.collect_select else R.drawable.collect_default)
+        mViewModel.isollect.observe(this, Observer {
+            isCollect = it
+            iv_right.setBackgroundResource(if (isCollect) R.drawable.collect_select else R.drawable.collect_default)
         })
     }
 
     override fun onBackPressed() {
-        //如果取消收藏了，我的收藏页面通过onActivityResult收到通知
-        if (isUnCollect) {
-            val intent = Intent()
-            val bundle = Bundle()
-            bundle.putSerializable("articleBean", articleBean)
-            intent.putExtras(bundle)
-            setResult(Activity.RESULT_OK, intent)
-        }
+        val intent = Intent()
+        intent.putExtra("is_collect", isCollect)
+        setResult(Activity.RESULT_OK, intent)
         super.onBackPressed()
     }
 }

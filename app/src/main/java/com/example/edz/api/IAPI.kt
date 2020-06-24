@@ -2,7 +2,6 @@ package com.example.edz.api
 
 import com.example.edz.bean.*
 import com.network.INetResponse
-import io.reactivex.Observable
 import retrofit2.http.*
 
 /**
@@ -31,28 +30,34 @@ interface IAPI {
     suspend fun banners(): INetResponse<ArrayList<BannerBean>>
 
     //广场列表数据
-    @GET
-    suspend fun homeArticleList(@Url url: String): INetResponse<HomeArticleListResponse>
+    @GET("article/list/{pageNum}/json")
+    suspend fun homeArticleList(@Path("pageNum") pageNum: Int): INetResponse<HomeArticleListResponse>
 
     //公众号列表
     @GET("wxarticle/chapters/json")
     suspend fun wxarticle(): INetResponse<ArrayList<ArticleAuthorBean>>
 
     //公众号下的文章列表
-    @GET
-    suspend fun wxArticleHistory(@Url url: String): INetResponse<HomeArticleListResponse>
+    @GET("wxarticle/list/{id}/{pageNum}/json")
+    suspend fun wxArticleHistory(@Path("id") id: Int,
+                                 @Path("pageNum") pageNum: Int): INetResponse<HomeArticleListResponse>
+
+    //项目分类
+    @GET("project/tree/json")
+    suspend fun projectCategory(): INetResponse<ArrayList<ProjectCategoryBean>>
 
     //项目列表数据
-    @GET("project/list/1/json?cid=294")
-    suspend fun projectList(): INetResponse<ProjectListResponse>
+    @GET("project/list/{pageNum}/json")
+    suspend fun projectList(@Path("pageNum") pageNum: Int,
+                            @Query("cid") cid: Int): INetResponse<BaseListResponse<ProjectDetailBean>>
 
     //收藏站内文章
-    @POST
-    suspend fun collectArticle(@Url url: String): INetResponse<Any>
+    @POST("lg/collect/{id}/json")
+    suspend fun collectArticle(@Path("id") id: Int): INetResponse<Any>
 
     //我的收藏
-    @GET
-    suspend fun collectArticleList(@Url url: String): INetResponse<HomeArticleListResponse>
+    @GET("lg/collect/list/{pageNum}/json")
+    suspend fun collectArticleList(@Path("pageNum") pageNum: Int): INetResponse<HomeArticleListResponse>
 
     //取消收藏
     @POST("/lg/uncollect_originId/{id}/json")
@@ -62,5 +67,6 @@ interface IAPI {
      * 取消收藏
      */
     @POST("/lg/uncollect/{id}/json")
-    suspend fun cancelCollectArticle(@Path("id") id: Int, @Query("originId") originId: Int): INetResponse<Any>
+    suspend fun cancelCollectArticle(@Path("id") id: Int,
+                                     @Query("originId") originId: Int): INetResponse<Any>
 }

@@ -6,4 +6,5 @@ package com.example.edz.bean
  * e-mail : zhengws@chinacarbon-al.com
  * description ：
  */
-data class HomeArticleListResponse(var datas: ArrayList<ArticleListItemBean>?)
+data class HomeArticleListResponse(var datas: ArrayList<ArticleListItemBean>?,
+                                   var total: Int)

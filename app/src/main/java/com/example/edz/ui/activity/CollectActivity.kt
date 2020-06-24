@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.constant.AppStaticRes
 import com.example.edz.BR
 import com.example.edz.R
-import com.example.edz.bean.ArticleListItemBean
 import com.example.edz.databinding.ActivityCollectBinding
 import com.example.edz.ui.adapter.DiscoverArticleAdapter
 import com.example.edz.viewmodel.CollectViewModel
@@ -22,12 +21,23 @@ import kotlinx.android.synthetic.main.layout_base_title.*
  * description ：
  */
 class CollectActivity : BaseMvvmActivity<CollectViewModel, ActivityCollectBinding>() {
+    private var mPosition: Int = -1
     override fun attachLayoutRes(): Int = R.layout.activity_collect
 
     override fun initViews() {
         middle_title.text = "我的收藏"
         mDataBind.articleManager = LinearLayoutManager(this)
-        mDataBind.articleAdapter = DiscoverArticleAdapter(this, BR.data, true).apply {
+        mDataBind.articleAdapter = DiscoverArticleAdapter(this,
+                BR.data,
+                true,
+                itemClick = {
+                    mPosition = it
+                    WebViewActivity.start(this,
+                            mDataBind.articleAdapter!!.mList[it].link,
+                            mDataBind.articleAdapter!!.mList[it].id,
+                            mDataBind.articleAdapter!!.mList[it].originId,
+                            true)
+                }).apply {
             mViewModel.articles.observe(this@CollectActivity, Observer {
                 addList(it)
             })
@@ -50,8 +60,12 @@ class CollectActivity : BaseMvvmActivity<CollectViewModel, ActivityCollectBindin
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == AppStaticRes.ARTICLE_DETAIL_CODE && resultCode == Activity.RESULT_OK) {
             data?.let {
-                val articleListItemBean = it.getSerializableExtra("articleBean") as ArticleListItemBean
-                mDataBind.articleAdapter?.removeItem(articleListItemBean)
+                val isCollect = intent.getBooleanExtra("is_collect", false)
+                if (!isCollect && mPosition != -1) {
+                    mDataBind.articleAdapter?.let {
+                        it.removeItem(mPosition)
+                    }
+                }
             }
         }
     }

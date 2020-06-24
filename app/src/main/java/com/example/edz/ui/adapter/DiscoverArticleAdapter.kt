@@ -1,15 +1,10 @@
 package com.example.edz.ui.adapter
 
 import android.content.Context
-import android.content.Intent
-import android.os.Bundle
 import androidx.lifecycle.MutableLiveData
-import com.constant.AppStaticRes
 import com.example.edz.R
 import com.example.edz.bean.ArticleListItemBean
 import com.example.edz.databinding.LayoutAdapterDiscoverArticleBinding
-import com.example.edz.ui.activity.WebViewActivity
-import com.mvvm.BaseMvvmActivity
 
 /**
  * author : zhengweishuai
@@ -17,22 +12,17 @@ import com.mvvm.BaseMvvmActivity
  * e-mail : zhengws@chinacarbon-al.com
  * description ：
  */
-class DiscoverArticleAdapter(val context: Context, id: Int, private val isCollectArt: Boolean = false) :
+class DiscoverArticleAdapter(val context: Context,
+                             id: Int,
+                             private val isCollectArt: Boolean = false,
+                             val itemClick: (position: Int) -> Unit) :
         BaseAdapter<ArticleListItemBean, LayoutAdapterDiscoverArticleBinding>(context, id) {
     var deletePos = MutableLiveData<Int>()
 
     override fun onBindVh(dataBinding: LayoutAdapterDiscoverArticleBinding?, holder: SupperViewHodel, position: Int) {
         dataBinding?.let {
             it.contentLayout.setOnClickListener {
-                val bundle = Bundle()
-                if (isCollectArt) {
-                    mList[position].collect = true
-                }
-                bundle.putSerializable("articleBean", mList[position])
-                val intent = Intent(context, WebViewActivity::class.java)
-                intent.putExtras(bundle)
-                val activity = context as BaseMvvmActivity<*, *>
-                activity.startActivityForResult(intent, AppStaticRes.ARTICLE_DETAIL_CODE)
+                itemClick(position)
             }
             it.swipeMenu.isSwipeEnable = isCollectArt
             it.tvDelete.setOnClickListener {

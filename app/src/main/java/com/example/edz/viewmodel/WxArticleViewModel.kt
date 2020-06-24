@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.edz.api.NetworkHelper
 import com.example.edz.bean.ArticleAuthorBean
 import com.example.edz.bean.ArticleListItemBean
+import com.example.edz.bean.HomeArticleListResponse
 import com.mvvm.vm.BaseViewModel
 import com.mvvm.vm.request
 
@@ -15,7 +16,7 @@ import com.mvvm.vm.request
  */
 class WxArticleViewModel : BaseViewModel() {
     var authors = MutableLiveData<ArrayList<ArticleAuthorBean>>()
-    var articles = MutableLiveData<ArrayList<ArticleListItemBean>>()
+    var articles = MutableLiveData<HomeArticleListResponse>()
 
     fun requestAuthors() {
         request({
@@ -28,13 +29,13 @@ class WxArticleViewModel : BaseViewModel() {
     }
 
     fun requestArticles(id: Int, page: Int) {
+        if (id == -1) return
         request({
-            val url = "wxarticle/list/$id/$page/json"
-            NetworkHelper.newInstance().wxArticleHistory(url)
+            NetworkHelper.newInstance().wxArticleHistory(id, page)
         }, {
-            articles.postValue(it?.datas)
+            articles.postValue(it)
         }, {
             it.message?.let { it1 -> showToast(it1) }
-        }, showLoading = true)
+        })
     }
 }

@@ -1,12 +1,9 @@
 package com.example.edz.ui.adapter
 
 import android.content.Context
-import android.content.Intent
-import android.os.Bundle
 import com.example.edz.R
 import com.example.edz.bean.ArticleListItemBean
 import com.example.edz.databinding.LayoutAdapterHomeArticleBinding
-import com.example.edz.ui.activity.WebViewActivity
 
 /**
  * author : zhengweishuai
@@ -14,7 +11,9 @@ import com.example.edz.ui.activity.WebViewActivity
  * e-mail : zhengws@chinacarbon-al.com
  * description ：
  */
-class HomeArticleAdapter(var context: Context, br_id: Int) :
+class HomeArticleAdapter(var context: Context,
+                         br_id: Int,
+                         val onItemClick: (position: Int) -> Unit = {}) :
         BaseAdapter<ArticleListItemBean, LayoutAdapterHomeArticleBinding>(context, br_id) {
     override fun onBindVh(dataBinding: LayoutAdapterHomeArticleBinding?, holder: SupperViewHodel, position: Int) {
         dataBinding?.adapterClick = AdapterClick(position)
@@ -24,11 +23,7 @@ class HomeArticleAdapter(var context: Context, br_id: Int) :
 
     inner class AdapterClick(private val position: Int) {
         fun itemClick() {
-            val bundle = Bundle()
-            bundle.putSerializable("articleBean", mList[position])
-            val intent = Intent(context, WebViewActivity::class.java)
-            intent.putExtras(bundle)
-            context.startActivity(intent)
+            onItemClick(position)
         }
     }
 }

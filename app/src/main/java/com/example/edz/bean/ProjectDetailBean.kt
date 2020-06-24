@@ -1,5 +1,7 @@
 package com.example.edz.bean
 
+import java.io.Serializable
+
 /**
  * author : zhengweishuai
  * date : 2020/6/17 0017.
@@ -11,5 +13,6 @@ class ProjectDetailBean(val id: Int,
                         val desc: String = "",
                         val envelopePic: String = "",
                         val link: String = "",
+                        var collect: Boolean,
                         val niceDate: String = "",
-                        val projectLink: String = "")
+                        val projectLink: String = "") : Serializable

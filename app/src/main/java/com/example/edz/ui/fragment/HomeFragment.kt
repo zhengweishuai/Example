@@ -1,6 +1,7 @@
 package com.example.edz.ui.fragment
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.os.Handler
 import android.view.MotionEvent
@@ -8,10 +9,12 @@ import android.view.View.OnTouchListener
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.ViewPager
+import com.constant.AppStaticRes
 import com.example.edz.BR
 import com.example.edz.R
 import com.example.edz.databinding.FragmentHomeBinding
 import com.example.edz.ui.activity.LoginActivity
+import com.example.edz.ui.activity.WebViewActivity
 import com.example.edz.ui.adapter.HomeArticleAdapter
 import com.example.edz.ui.adapter.HomeBannerAdapter
 import com.example.edz.ui.widget.PersionalPopup
@@ -37,7 +40,8 @@ class HomeFragment : BaseMvvmFragment<HomeViewModel, FragmentHomeBinding>() {
     var mHandler = Handler()
     private val vp_switch_duration = 3000L//viewpager切换时间间隔
     private val vp_slide_duration = 1000//viewpager滑动时间
-    private var pageNum: Int = 1
+    private var pageNum: Int = 0
+    private var clickPosition = -1
 
     override fun attachLayoutRes(): Int = R.layout.fragment_home
 
@@ -55,11 +59,24 @@ class HomeFragment : BaseMvvmFragment<HomeViewModel, FragmentHomeBinding>() {
         }
         //recyclerview
         mDataBind.manager = LinearLayoutManager(requireActivity())
-        mDataBind.rvAdapter = HomeArticleAdapter(requireActivity(), br_id = BR.itemBeam).apply {
-            mViewModel.articleData.observe(this@HomeFragment, Observer {
+        mDataBind.rvAdapter = HomeArticleAdapter(requireActivity(), br_id = BR.itemBeam, onItemClick = {
+            clickPosition = it
+            val articleListItemBean = mDataBind.rvAdapter!!.mList[clickPosition]
+            WebViewActivity.start(this,
+                    articleListItemBean.link,
+                    articleListItemBean.id,
+                    articleListItemBean.originId,
+                    articleListItemBean.collect)
+        }).apply {
+            mViewModel.articleData.observe(this@HomeFragment, Observer { response ->
                 if (refresh_view.isRefreshing) refresh_view.finishRefresh()
                 if (refresh_view.isLoading) refresh_view.finishLoadMore()
-                if (pageNum == 1) setNewData(it) else addList(it)
+                response.datas?.let {
+                    if (pageNum == 0) setNewData(it) else addList(it)
+                }
+                if (this.mList.size >= response.total) {
+                    refresh_view.finishLoadMoreWithNoMoreData()
+                }
             })
         }
         //vp
@@ -78,7 +95,7 @@ class HomeFragment : BaseMvvmFragment<HomeViewModel, FragmentHomeBinding>() {
         refresh_view.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {
             override fun onRefresh(refreshLayout: RefreshLayout) {
                 refreshLayout.resetNoMoreData()
-                pageNum = 1
+                pageNum = 0
                 mViewModel.requestArticleList(pageNum)
             }
 
@@ -93,7 +110,7 @@ class HomeFragment : BaseMvvmFragment<HomeViewModel, FragmentHomeBinding>() {
             } else {
                 XPopup.Builder(requireActivity())
                         .popupPosition(PopupPosition.Left)
-                        .hasStatusBarShadow(true)
+                        .hasStatusBarShadow(false)
                         .asCustom(PersionalPopup(requireActivity()))
                         .show()
             }
@@ -149,6 +166,19 @@ class HomeFragment : BaseMvvmFragment<HomeViewModel, FragmentHomeBinding>() {
     override fun onDestroy() {
         mHandler.removeCallbacks(mVpRun)
         super.onDestroy()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == AppStaticRes.ARTICLE_DETAIL_CODE && resultCode == Activity.RESULT_OK) {
+            data?.let { intent ->
+                mDataBind.rvAdapter?.let {
+                    val isCollect = intent.getBooleanExtra("is_collect", false)
+                    it.mList[clickPosition].collect = isCollect
+                    it.notifyItemChanged(clickPosition)
+                }
+            }
+        }
     }
 
     private var mVpRun: Runnable = object : Runnable {

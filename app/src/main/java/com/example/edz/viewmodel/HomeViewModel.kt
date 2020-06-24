@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.edz.api.NetworkHelper
 import com.example.edz.bean.ArticleListItemBean
 import com.example.edz.bean.BannerBean
+import com.example.edz.bean.HomeArticleListResponse
 import com.mvvm.vm.BaseViewModel
 import com.mvvm.vm.request
 
@@ -15,7 +16,7 @@ import com.mvvm.vm.request
  */
 class HomeViewModel : BaseViewModel() {
     var bannerData = MutableLiveData<ArrayList<BannerBean>>()
-    var articleData = MutableLiveData<ArrayList<ArticleListItemBean>>()
+    var articleData = MutableLiveData<HomeArticleListResponse>()
 
     fun requestBanners() {
         request({
@@ -32,13 +33,9 @@ class HomeViewModel : BaseViewModel() {
     }
 
     fun requestArticleList(pageNum: Int) {
-        val url = "article/list/$pageNum/json"
-        request({ NetworkHelper.newInstance().homeArticleList(url) },
+        request({ NetworkHelper.newInstance().homeArticleList(pageNum) },
                 {
-                    articleData.postValue(it?.datas)
-                },
-                {
-
+                    articleData.postValue(it)
                 })
     }
 }

@@ -1,7 +1,6 @@
 package com.example.edz.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import com.constant.NetUrls
 import com.example.edz.api.NetworkHelper
 import com.mvvm.vm.BaseViewModel
 import com.mvvm.vm.request
@@ -13,15 +12,14 @@ import com.mvvm.vm.request
  * description ：
  */
 class WebViewModel : BaseViewModel() {
-    var unCollect = MutableLiveData<Boolean>()
+    var isollect = MutableLiveData<Boolean>()
 
-    fun collectArticle(id: Int?) {
+    fun collectArticle(id: Int) {
         request({
-            val url = NetUrls.COLLECT_ARTICLE + id + "/json"
-            NetworkHelper.newInstance().collectArticle(url)
+            NetworkHelper.newInstance().collectArticle(id)
         }, {
             showToast("收藏成功")
-            unCollect.postValue(false)
+            isollect.postValue(true)
         }, showLoading = true, showToast = true)
     }
 
@@ -30,7 +28,7 @@ class WebViewModel : BaseViewModel() {
             NetworkHelper.newInstance().cancelCollectArticle(id, orginId)
         }, {
             showToast("取消收藏")
-            unCollect.postValue(true)
+            isollect.postValue(false)
         }, showLoading = true, showToast = true)
     }
 }
