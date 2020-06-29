@@ -48,7 +48,7 @@
 //        this.context = context;
 //    }
 //
-//    public LineBreakLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+//    public CuctomerBanner(Context context, AttributeSet attrs, int defStyleAttr) {
 //        super(context, attrs, defStyleAttr);
 //        this.context = context;
 //        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.LineBreakLayout);
@@ -56,6 +56,7 @@
 //        ROW_SPACE = ta.getDimensionPixelSize(R.styleable.LineBreakLayout_rowSpace, 10);
 //        ta.recycle(); //回收
 //    }
+//
 //
 //    /**
 //     * 添加标签

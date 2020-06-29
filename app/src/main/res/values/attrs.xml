@@ -7,4 +7,20 @@
         <!--标签行距-->
         <attr name="rowSpace" format="dimension" />
     </declare-styleable>
+
+    <!--banner-->
+    <declare-styleable name="cus_banner">
+        <!--左右距离-->
+        <attr name="left_right_space" format="dimension" />
+        <!--        高度-->
+        <attr name="height" format="dimension" />
+        <!--        圆点直径-->
+        <attr name="point_width" format="dimension" />
+        <!--        圆点间距-->
+        <attr name="point_space" format="dimension" />
+        <!--        圆点选中颜色-->
+        <attr name="point_select_color" format="color" />
+        <!--        圆点默认颜色-->
+        <attr name="point_default_color" format="color" />
+    </declare-styleable>
 </resources>

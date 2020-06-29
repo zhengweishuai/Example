@@ -2,7 +2,7 @@ package com.example.edz
 
 import android.app.Activity
 import android.app.Application
-import com.base.BuildConfig
+import com.base.BuildConfig.IS_DEBUG
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
@@ -25,7 +25,7 @@ class MApp : Application() {
         //toast
         ToastUtils.init(this)
         //log
-        LogUtil.init(BuildConfig.IS_DEBUG, packageName)
+        LogUtil.init(true, packageName)
         //屏幕适配
         initAutoSize()
 //        if (LeakCanary.isInAnalyzerProcess(this)) {

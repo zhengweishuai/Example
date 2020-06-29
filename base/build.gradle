@@ -5,8 +5,6 @@ apply plugin: 'kotlin-kapt'
 // 不需要寻找控件，也就不需要生成R2，所以无需添加plugin
 // apply plugin: 'com.jakewharton.butterknife'
 android {
-    def API_HOST_PRODUCT = "\"https://api.pinlaninfo.com/\""
-    def API_HOST_DEVELOP = "\"http:192.168.3.125:9024/\""
     dataBinding {
         enabled true
     }
@@ -24,15 +22,13 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField("boolean", "IS_DEBUG", IS_DEBUG)
-            buildConfigField ("String", "API_HOST", "${API_HOST_PRODUCT}")
+            buildConfigField("boolean", "IS_DEBUG", "false")
         }
 
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField("boolean", "IS_DEBUG", IS_DEBUG)
-            buildConfigField ("String", "API_HOST", "${API_HOST_DEVELOP}")
+            buildConfigField("boolean", "IS_DEBUG", "true")
         }
     }
     compileOptions {

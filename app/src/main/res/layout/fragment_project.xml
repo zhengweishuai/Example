@@ -13,41 +13,41 @@
             type="androidx.recyclerview.widget.GridLayoutManager" />
     </data>
 
-    <com.scwang.smart.refresh.layout.SmartRefreshLayout
-        android:id="@+id/refresh_view"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="51dp">
+        android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/project_title_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/base_press"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/project_title_layout"
+            <View
                 android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_f1f3f4" />
+
+            <TextView
+                android:id="@+id/project_title"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/base_press"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:drawableRight="@drawable/down_option_icon"
+                android:drawablePadding="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                tool:text="完整项目" />
+        </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/color_f1f3f4" />
-
-                <TextView
-                    android:id="@+id/project_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/down_option_icon"
-                    android:drawablePadding="10dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    tool:text="完整项目" />
-            </LinearLayout>
-
+        <com.scwang.smart.refresh.layout.SmartRefreshLayout
+            android:id="@+id/refresh_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="51dp">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rl_project"
@@ -55,7 +55,6 @@
                 layoutManager="@{manager}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-        </LinearLayout>
-
-    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+        </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+    </LinearLayout>
 </layout>

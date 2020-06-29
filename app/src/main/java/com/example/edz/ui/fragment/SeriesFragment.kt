@@ -11,7 +11,7 @@ import com.mvvm.BaseMvvmFragment
  * author : zhengweishuai
  * date : 2020/6/15 0015.
  * e-mail : zhengws@chinacarbon-al.com
- * description ：
+ * description ：体系
  */
 class SeriesFragment :BaseMvvmFragment<SeriesViewModel, FragmentSeriesBinding>(){
     override fun attachLayoutRes(): Int  = R.layout.fragment_series

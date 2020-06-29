@@ -23,8 +23,6 @@ class HomeViewModel : BaseViewModel() {
             NetworkHelper.newInstance().banners()
         }, {
             it?.let {
-                it.add(it.size, it[0])
-                it.add(0, it[it.size - 2])
                 bannerData.postValue(it)
             }
         }, {

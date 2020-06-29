@@ -9,10 +9,6 @@
             type="com.example.edz.viewmodel.HomeViewModel" />
 
         <variable
-            name="bannerAdapter"
-            type="com.example.edz.ui.adapter.HomeBannerAdapter" />
-
-        <variable
             name="manager"
             type="androidx.recyclerview.widget.LinearLayoutManager" />
 
@@ -41,15 +37,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <androidx.viewpager.widget.ViewPager
-                        android:id="@+id/vp_banner"
-                        adapter="@{bannerAdapter}"
+                    <com.example.edz.ui.widget.CustomerBanner
+                        android:id="@+id/cus_banner"
                         android:layout_width="match_parent"
-                        android:layout_height="150dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/base_margin"
+                        app:height="150dp"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:left_right_space="@dimen/base_margin"
+                        app:point_default_color="@color/color_f2f4f5"
+                        app:point_select_color="@color/color_d81e06"
+                        app:point_space="5dp"
+                        app:point_width="5dp" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         adapter="@{rvAdapter}"
@@ -59,7 +60,7 @@
                         android:paddingBottom="10dp"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/vp_banner" />
+                        app:layout_constraintTop_toBottomOf="@+id/cus_banner" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.core.widget.NestedScrollView>
