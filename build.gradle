@@ -33,7 +33,7 @@ task clean(type: Delete) {
 
 ext {
     //最小sdk版本
-    minSdkVersion = 16
+    minSdkVersion = 22
     //目标sdk版本
     targetSdkVersion = 28
     //编译sdk版本

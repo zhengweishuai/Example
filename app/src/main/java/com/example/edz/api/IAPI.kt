@@ -69,4 +69,17 @@ interface IAPI {
     @POST("/lg/uncollect/{id}/json")
     suspend fun cancelCollectArticle(@Path("id") id: Int,
                                      @Query("originId") originId: Int): INetResponse<Any>
+
+    /**
+     * 体系
+     */
+    @GET("tree/json")
+    suspend fun tree(): INetResponse<ArrayList<SeriesCollectBean>>
+
+    /**
+     * 知识体系下的文章
+     */
+    @GET("article/list/{pageNum}/json")
+    suspend fun treeList(@Path("pageNum") pageNum: Int,
+                     @Query("cid") cid: Int): INetResponse<HomeArticleListResponse>
 }

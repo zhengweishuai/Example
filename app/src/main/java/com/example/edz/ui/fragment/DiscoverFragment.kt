@@ -26,7 +26,7 @@ class DiscoverFragment : BaseMvvmFragment<DiscoverViewModel, FragmentDiscoverBin
             tb_layout.addTab(tb_layout.newTab())
             tb_layout.getTabAt(i)?.text = tabs[i]
         }
-        vp.offscreenPageLimit = tabs.size
+        vp.offscreenPageLimit = 1
     }
 
     override fun initListener() {

@@ -168,7 +168,6 @@ class CustomerBanner : FrameLayout, OnTouchListener, ViewPager.OnPageChangeListe
                     mPosition -= 1
                 }
             }
-            LogUtil.d("------------->当前position" + position + "实际position" + mPosition)
             for (p in 0 until count) {
                 val child: View = ll_layout_point.getChildAt(p)
                 if (p == mPosition) {
