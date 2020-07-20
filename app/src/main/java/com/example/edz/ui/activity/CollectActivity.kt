@@ -9,7 +9,10 @@ import com.example.edz.BR
 import com.example.edz.R
 import com.example.edz.databinding.ActivityCollectBinding
 import com.example.edz.ui.adapter.DiscoverArticleAdapter
+import com.example.edz.ui.widget.CustomPopup
+import com.example.edz.utils.toActivity
 import com.example.edz.viewmodel.CollectViewModel
+import com.lxj.xpopup.XPopup
 import com.mvvm.BaseMvvmActivity
 import kotlinx.android.synthetic.main.layout_base_title.*
 
@@ -26,17 +29,29 @@ class CollectActivity : BaseMvvmActivity<CollectViewModel, ActivityCollectBindin
 
     override fun initViews() {
         middle_title.text = "我的收藏"
+        XPopup.Builder(this)
+                .asCustom(CustomPopup(this, leftClickListener = {
+
+                }, rightClickListener = {
+
+                }, content = "列表条目左滑可以删除收藏", left = "", right = "确定"))
+                .show()
         mDataBind.articleManager = LinearLayoutManager(this)
         mDataBind.articleAdapter = DiscoverArticleAdapter(this,
                 BR.data,
                 true,
                 itemClick = {
                     mPosition = it
-                    WebViewActivity.start(this,
-                            mDataBind.articleAdapter!!.mList[it].link,
-                            mDataBind.articleAdapter!!.mList[it].id,
-                            mDataBind.articleAdapter!!.mList[it].originId,
-                            true)
+                    toActivity<WebViewActivity>(
+                            "web_url" to mDataBind.articleAdapter!!.mList[it].link,
+                            "id" to mDataBind.articleAdapter!!.mList[it].link,
+                            "originId" to mDataBind.articleAdapter!!.mList[it].id,
+                            "is_collect" to true)
+//                    WebViewActivity.start(this,
+//                            mDataBind.articleAdapter!!.mList[it].link,
+//                            mDataBind.articleAdapter!!.mList[it].id,
+//                            mDataBind.articleAdapter!!.mList[it].originId,
+//                            true)
                 }).apply {
             mViewModel.articles.observe(this@CollectActivity, Observer {
                 addList(it)

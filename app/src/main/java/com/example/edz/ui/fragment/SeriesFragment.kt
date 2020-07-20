@@ -58,6 +58,10 @@ class SeriesFragment : BaseMvvmFragment<SeriesViewModel, FragmentSeriesBinding>(
     }
 
     override fun doBusiness() {
+    }
+
+    override fun lazyLoad() {
+        super.lazyLoad()
         mViewModel.requestSeriesData()
     }
 }

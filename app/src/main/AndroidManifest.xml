@@ -89,6 +89,12 @@
             android:name=".ui.activity.ArticleSeriesActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+
+        <!--        搜索-->
+        <activity
+            android:name=".ui.activity.ActivitySearch"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

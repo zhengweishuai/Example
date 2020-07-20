@@ -17,6 +17,7 @@ import androidx.lifecycle.Observer
 import com.constant.AppStaticRes
 import com.example.edz.R
 import com.example.edz.databinding.ActivityWebViewBinding
+import com.example.edz.utils.finish
 import com.example.edz.viewmodel.WebViewModel
 import com.mvvm.BaseMvvmActivity
 import kotlinx.android.synthetic.main.activity_web_view.*
@@ -133,9 +134,10 @@ class WebViewActivity : BaseMvvmActivity<WebViewModel, ActivityWebViewBinding>()
     }
 
     override fun onBackPressed() {
-        val intent = Intent()
-        intent.putExtra("is_collect", isCollect)
-        setResult(Activity.RESULT_OK, intent)
+        finish("is_collect" to isCollect)
+//        val intent = Intent()
+//        intent.putExtra("is_collect", isCollect)
+//        setResult(Activity.RESULT_OK, intent)
         super.onBackPressed()
     }
 }

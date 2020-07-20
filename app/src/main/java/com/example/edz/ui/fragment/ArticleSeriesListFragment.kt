@@ -96,7 +96,6 @@ class ArticleSeriesListFragment : BaseMvvmFragment<ArticleSeriesListViewModel, F
     }
 
     override fun doBusiness() {
-        mViewModel.requestArticleList(pageNum, mSeriesBean.id)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -110,5 +109,10 @@ class ArticleSeriesListFragment : BaseMvvmFragment<ArticleSeriesListViewModel, F
                 }
             }
         }
+    }
+
+    override fun lazyLoad() {
+        super.lazyLoad()
+        mViewModel.requestArticleList(pageNum, mSeriesBean.id)
     }
 }

@@ -1,6 +1,8 @@
 package com.example.edz.ui.widget
 
 import android.content.Context
+import android.text.TextUtils
+import android.view.View
 import com.example.edz.R
 import com.lxj.xpopup.core.CenterPopupView
 import kotlinx.android.synthetic.main.layout_popup_custom.view.*
@@ -27,6 +29,10 @@ class CustomPopup(context: Context,
         popup_content.text = content
         popup_left.text = left
         popup_right.text = right
+        if (TextUtils.isEmpty(left)){
+            popup_left.visibility = View.GONE
+            v_line.visibility = View.GONE
+        }
         popup_left.setOnClickListener {
             leftClickListener(this)
             dismiss()

@@ -86,6 +86,10 @@ class WxArticleFragment : BaseMvvmFragment<WxArticleViewModel, FragmentWxArticle
     }
 
     override fun doBusiness() {
+    }
+
+    override fun lazyLoad() {
+        super.lazyLoad()
         mViewModel.requestAuthors()
     }
 

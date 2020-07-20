@@ -76,7 +76,7 @@ dependencies {
     //刷新加载
     api "com.scwang.smart:refresh-layout-kernel:$rootProject.refresh"
     api "com.scwang.smart:refresh-footer-classics:$rootProject.refresh"
-    api "com.scwang.smart:refresh-header-classics:$rootProject.refresh"
+    api  'com.scwang.smart:refresh-header-material:2.0.1'    //谷歌刷新头
     api "com.lxj:xpopup:$rootProject.xpopup"
     api 'com.qmuiteam:qmui:2.0.0-alpha10'
 }

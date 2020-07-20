@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/base_custom_popup_bg"
+    android:orientation="vertical">
+
+    <com.widget.EditTextWithDel
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="@dimen/base_margin"
+        android:background="@drawable/login_shape_edit_default" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/search_article_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

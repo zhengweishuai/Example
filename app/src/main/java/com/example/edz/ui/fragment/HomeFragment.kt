@@ -9,6 +9,7 @@ import com.constant.AppStaticRes
 import com.example.edz.BR
 import com.example.edz.R
 import com.example.edz.databinding.FragmentHomeBinding
+import com.example.edz.ui.activity.ActivitySearch
 import com.example.edz.ui.activity.LoginActivity
 import com.example.edz.ui.activity.WebViewActivity
 import com.example.edz.ui.adapter.HomeArticleAdapter
@@ -38,7 +39,8 @@ class HomeFragment : BaseMvvmFragment<HomeViewModel, FragmentHomeBinding>() {
 
     override fun initViews() {
         mDataBind.vm = mViewModel
-        iv_left.setBackgroundResource(R.drawable.home_persional_icon)
+        iv_left.setBackgroundResource(R.drawable.filter_icon)
+        iv_right.setBackgroundResource(R.drawable.search_icon)
         middle_title.text = "玩安卓"
         //recyclerview
         mDataBind.manager = LinearLayoutManager(requireActivity())
@@ -92,6 +94,9 @@ class HomeFragment : BaseMvvmFragment<HomeViewModel, FragmentHomeBinding>() {
                         .asCustom(PersionalPopup(requireActivity()))
                         .show()
             }
+        }
+        rl_right.setOnClickListener {
+            ActivitySearch.start(requireActivity())
         }
     }
 

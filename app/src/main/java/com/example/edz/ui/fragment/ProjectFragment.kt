@@ -108,6 +108,10 @@ class ProjectFragment : BaseMvvmFragment<ProjectViewModel, FragmentProjectBindin
     }
 
     override fun doBusiness() {
+    }
+
+    override fun lazyLoad() {
+        super.lazyLoad()
         mViewModel.requestProjectCategory()
     }
 

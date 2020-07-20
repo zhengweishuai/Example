@@ -27,7 +27,7 @@ class ArticleSeriesActivity : BaseMvvmActivity<ArticleSeriesViewModel, ActivityA
         fun start(context: Context, series: SeriesCollectBean, currentSeries: SeriesCollectBean? = null) {
             val starter = Intent(context, ArticleSeriesActivity::class.java)
             starter.putExtra("SeriesSection", series)
-            starter.putExtra("CurrentSection", series)
+            starter.putExtra("CurrentSection", currentSeries)
             context.startActivity(starter)
         }
     }
@@ -41,13 +41,18 @@ class ArticleSeriesActivity : BaseMvvmActivity<ArticleSeriesViewModel, ActivityA
         middle_title.text = series.name
         mDataBind.vm = mViewModel
         currentSection?.let {
-            mDataBind.adapter = SeriesTypePageAdapter(supportFragmentManager, currentSection.children)
-            tb_layout.setupWithViewPager(vp, false)
-            for (i in currentSection.children.indices) {
+            for (i in series.children.indices) {
                 tb_layout.addTab(tb_layout.newTab())
-                tb_layout.getTabAt(i)?.text = currentSection.children[i].name
+                tb_layout.getTabAt(i)?.text = series.children[i].name
             }
-            vp.offscreenPageLimit = 1
+            mDataBind.adapter = SeriesTypePageAdapter(supportFragmentManager, series.children)
+            tb_layout.setupWithViewPager(vp, false)
+            vp.offscreenPageLimit = 3
+        }
+        series.children.forEachIndexed { index, seriesCollectBean ->
+            if (seriesCollectBean.id == currentSection?.id) {
+                tb_layout.getTabAt(index)?.select()
+            }
         }
     }
 

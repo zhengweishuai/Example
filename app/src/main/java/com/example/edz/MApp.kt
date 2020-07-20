@@ -2,9 +2,8 @@ package com.example.edz
 
 import android.app.Activity
 import android.app.Application
-import com.base.BuildConfig.IS_DEBUG
 import com.scwang.smart.refresh.footer.ClassicsFooter
-import com.scwang.smart.refresh.header.ClassicsHeader
+import com.scwang.smart.refresh.header.MaterialHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.utils.LogUtil
 import com.utils.SPUtils
@@ -56,9 +55,9 @@ class MApp : Application() {
         //static 代码段可以防止内存泄露
         init {
             //设置全局的Header构建器
-            SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, _ -> ClassicsHeader(context) }
+            SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, _ -> MaterialHeader(context) }
             //设置全局的Footer构建器
-            SmartRefreshLayout.setDefaultRefreshFooterCreator { context, _ -> ClassicsFooter(context).setDrawableSize(20f) }
+            SmartRefreshLayout.setDefaultRefreshFooterCreator { context, _ -> ClassicsFooter(context) }
         }
     }
 }
