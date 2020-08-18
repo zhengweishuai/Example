@@ -6,13 +6,12 @@ import android.content.Intent
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.constant.AppStaticRes
-import com.example.edz.BR
 import com.example.edz.R
 import com.example.edz.databinding.FragmentHomeBinding
 import com.example.edz.ui.activity.ActivitySearch
 import com.example.edz.ui.activity.LoginActivity
 import com.example.edz.ui.activity.WebViewActivity
-import com.example.edz.ui.adapter.HomeArticleAdapter
+import com.example.edz.ui.adapter.HomeAdapter
 import com.example.edz.ui.widget.PersionalPopup
 import com.example.edz.utils.UserDataUtil
 import com.example.edz.viewmodel.HomeViewModel
@@ -21,6 +20,7 @@ import com.lxj.xpopup.enums.PopupPosition
 import com.mvvm.BaseMvvmFragment
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
+import com.utils.LogUtil
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.layout_base_title.*
 
@@ -33,7 +33,14 @@ import kotlinx.android.synthetic.main.layout_base_title.*
  */
 class HomeFragment : BaseMvvmFragment<HomeViewModel, FragmentHomeBinding>() {
     private var pageNum: Int = 0 //接口请求页码
-    private var clickPosition = -1 //点击的position
+
+    //点击的文章position
+    private var clickPosition = -1
+
+    //适配器
+    val homeAdapter by lazy {
+        HomeAdapter(requireContext())
+    }
 
     override fun attachLayoutRes(): Int = R.layout.fragment_home
 
@@ -44,29 +51,25 @@ class HomeFragment : BaseMvvmFragment<HomeViewModel, FragmentHomeBinding>() {
         middle_title.text = "玩安卓"
         //recyclerview
         mDataBind.manager = LinearLayoutManager(requireActivity())
-        mDataBind.rvAdapter = HomeArticleAdapter(requireActivity(), br_id = BR.itemBeam, onItemClick = {
-            clickPosition = it
-            val articleListItemBean = mDataBind.rvAdapter!!.mList[clickPosition]
-            WebViewActivity.start(this,
-                    articleListItemBean.link,
-                    articleListItemBean.id,
-                    articleListItemBean.originId,
-                    articleListItemBean.collect)
-        }).apply {
-            mViewModel.articleData.observe(this@HomeFragment, Observer { response ->
-                if (refresh_view.isRefreshing) refresh_view.finishRefresh()
-                if (refresh_view.isLoading) refresh_view.finishLoadMore()
-                response.datas?.let {
-                    if (pageNum == 0) setNewData(it) else addList(it)
+        mDataBind.rvAdapter = homeAdapter
+
+        //文章列表
+        mViewModel.articleData.observe(this@HomeFragment, Observer { response ->
+            if (refresh_view.isRefreshing) refresh_view.finishRefresh()
+            if (refresh_view.isLoading) refresh_view.finishLoadMore()
+            response.datas?.let {
+                if (pageNum == 0) {
+                    homeAdapter.articles.clear()
                 }
-                if (this.mList.size >= response.total) {
-                    refresh_view.finishLoadMoreWithNoMoreData()
-                }
-            })
-        }
+                homeAdapter.updateArticles(it)
+            }
+            if (homeAdapter.articles.size >= response.total) {
+                refresh_view.finishLoadMoreWithNoMoreData()
+            }
+        })
         //banner
         mViewModel.bannerData.observe(this@HomeFragment, Observer {
-            cus_banner.setData(it)
+            homeAdapter.updateBanners(it)
         })
     }
 
@@ -98,21 +101,33 @@ class HomeFragment : BaseMvvmFragment<HomeViewModel, FragmentHomeBinding>() {
         rl_right.setOnClickListener {
             ActivitySearch.start(requireActivity())
         }
+        homeAdapter.setOnItemClickListener(object : HomeAdapter.onItemClickListener {
+            override fun onBannerClickListener(position: Int) {
+                if (homeAdapter.banners.size > position){
+                    val bannerBean = homeAdapter.banners[clickPosition]
+                    WebViewActivity.start(this@HomeFragment,
+                            bannerBean.url,
+                            bannerBean.id.toInt(),
+                            0,
+                            false)
+                }
+            }
+
+            override fun onArticleClickListener(position: Int) {
+                clickPosition = position
+                val articleListItemBean = homeAdapter.articles[clickPosition]
+                WebViewActivity.start(this@HomeFragment,
+                        articleListItemBean.link,
+                        articleListItemBean.id,
+                        articleListItemBean.originId,
+                        articleListItemBean.collect)
+            }
+        })
     }
 
     override fun doBusiness() {
         mViewModel.requestBanners()
         refresh_view.autoRefresh()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        cus_banner.onStop()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        cus_banner.onStart()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -121,7 +136,7 @@ class HomeFragment : BaseMvvmFragment<HomeViewModel, FragmentHomeBinding>() {
             data?.let { intent ->
                 mDataBind.rvAdapter?.let {
                     val isCollect = intent.getBooleanExtra("is_collect", false)
-                    it.mList[clickPosition].collect = isCollect
+                    homeAdapter.articles[clickPosition].collect = isCollect
                     it.notifyItemChanged(clickPosition)
                 }
             }

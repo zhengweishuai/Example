@@ -70,4 +70,6 @@ ext {
     immersionbar = "3.0.0"
     //刷新加载
     refresh = "2.0.1"
+    //banner
+    banner = "1.4.10"
 }

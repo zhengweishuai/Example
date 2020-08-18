@@ -6,10 +6,11 @@ package com.example.edz.bean
  * e-mail : zhengws@chinacarbon-al.com
  * description ：
  */
-data class BannerBean(var id: String?,
-                      var desc: String?,
-                      var isVisible: Int?,
-                      var order: Int?,
-                      var title: String?,
-                      var type: Int?,
-                      var imagePath: String?)
+data class BannerBean(var id: String = "",
+                      var desc: String = "",
+                      var url: String = "",
+                      var isVisible: Int = 0,
+                      var order: Int = 0,
+                      var title: String  = "",
+                      var type: Int = 0,
+                      var imagePath: String = "")

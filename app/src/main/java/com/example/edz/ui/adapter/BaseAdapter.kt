@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
  * date 2020/5/26 0026.
  * description：
  */
-abstract class BaseAdapter<T, DB : ViewDataBinding>(val mContext: Context, val br_id: Int) :
+abstract class BaseAdapter<T, DB : ViewDataBinding>(val mContext: Context, val itemBeanId: Int) :
         RecyclerView.Adapter<SupperViewHodel>() {
 
     var mList = ArrayList<T>()
@@ -30,7 +30,7 @@ abstract class BaseAdapter<T, DB : ViewDataBinding>(val mContext: Context, val b
 
     override fun onBindViewHolder(holder: SupperViewHodel, position: Int) {
         val dataBinding: DB? = DataBindingUtil.getBinding<DB>(holder.itemView)
-        dataBinding?.setVariable(br_id, mList[position])
+        dataBinding?.setVariable(itemBeanId, mList[position])
         onBindVh(dataBinding, holder, position)
         dataBinding?.executePendingBindings()
     }

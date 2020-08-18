@@ -82,4 +82,10 @@ interface IAPI {
     @GET("article/list/{pageNum}/json")
     suspend fun treeList(@Path("pageNum") pageNum: Int,
                      @Query("cid") cid: Int): INetResponse<HomeArticleListResponse>
+
+    /**
+     * 知识体系下的文章
+     */
+    @GET("article/list/{pageNum}/json")
+    suspend fun treeLists(@Body pageNum: UserBean): INetResponse<HomeArticleListResponse>
 }

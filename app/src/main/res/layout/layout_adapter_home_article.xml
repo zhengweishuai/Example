@@ -20,8 +20,7 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="15dp"
         android:layout_marginRight="15dp"
-        android:background="@drawable/shape_article_item_bg"
-        android:onClick="@{()->adapterClick.itemClick()}"
+        android:background="@color/white"
         android:padding="15dp">
 
         <TextView
@@ -30,7 +29,6 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="@{itemBeam.title}"
             android:textColor="@color/color_333333"
             android:textSize="15sp"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -42,7 +40,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@{itemBeam.superChapterName}"
             android:textColor="@color/color_d81e06"
             android:textSize="13sp"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -54,7 +51,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@{itemBeam.shareUser}"
             android:textSize="13sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -66,7 +62,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@{itemBeam.niceDate}"
             android:textSize="13sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"

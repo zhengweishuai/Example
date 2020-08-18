@@ -88,7 +88,7 @@ class CustomerBanner : FrameLayout, OnTouchListener, ViewPager.OnPageChangeListe
     /*
     填充banner数据
      */
-    fun setData(list: ArrayList<BannerBean>) {
+    fun setData(list: MutableList<BannerBean>) {
         ll_layout_point.removeAllViews()
         for (i in 1..list.size) {
             val view = View(context)
