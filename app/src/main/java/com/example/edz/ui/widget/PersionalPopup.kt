@@ -38,11 +38,9 @@ class PersionalPopup(context: Context) : DrawerPopupView(context) {
             initFix()
         }
         integral.setOnClickListener {
-            ToastUtils.show("bug已经修复了")
         }
         setting.setOnClickListener {
             context.startActivity(Intent(context, SettingActivity::class.java))
-            dismiss()
         }
     }
 

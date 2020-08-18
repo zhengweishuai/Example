@@ -1,4 +1,4 @@
-package com.network
+package com.kthttp
 
 import java.io.Serializable
 

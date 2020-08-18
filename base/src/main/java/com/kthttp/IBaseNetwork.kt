@@ -1,4 +1,4 @@
-package com.network
+package com.kthttp
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

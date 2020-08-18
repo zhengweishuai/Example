@@ -29,12 +29,11 @@ class CollectActivity : BaseMvvmActivity<CollectViewModel, ActivityCollectBindin
 
     override fun initViews() {
         middle_title.text = "我的收藏"
+        val customPopup = CustomPopup(this@CollectActivity)
+        customPopup.setContent("列表条目左滑可以删除收藏")
+                .setRightBtn("确定", rightClickListener = {})
         XPopup.Builder(this)
-                .asCustom(CustomPopup(this, leftClickListener = {
-
-                }, rightClickListener = {
-
-                }, content = "列表条目左滑可以删除收藏", left = "", right = "确定"))
+                .asCustom(customPopup)
                 .show()
         mDataBind.articleManager = LinearLayoutManager(this)
         mDataBind.articleAdapter = DiscoverArticleAdapter(this,

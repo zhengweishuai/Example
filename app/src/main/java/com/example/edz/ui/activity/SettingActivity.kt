@@ -1,9 +1,9 @@
 package com.example.edz.ui.activity
 
 import android.content.Intent
+import com.constant.SPConfigs
 import com.example.edz.R
 import com.example.edz.databinding.ActivitySettingBinding
-import com.constant.SPConfigs
 import com.example.edz.ui.widget.CustomPopup
 import com.example.edz.viewmodel.SettingViewModel
 import com.lxj.xpopup.XPopup
@@ -34,16 +34,16 @@ class SettingActivity : BaseMvvmActivity<SettingViewModel, ActivitySettingBindin
 
     inner class ProxyClick() {
         fun logout() {
-            XPopup.Builder(this@SettingActivity)
-                    .asCustom(CustomPopup(this@SettingActivity, leftClickListener = {
-                        it.dismiss()
-                    }, rightClickListener = {
+            val customPopup = CustomPopup(this@SettingActivity)
+            customPopup.setTitle("提示")
+                    .setContent("是否退出登录")
+                    .setLeftBtn("取消", leftClickListener = {})
+                    .setRightBtn("确定", rightClickListener = {
                         SPUtils.removePreferences(SPConfigs.USER_DATA)
-                        it.dismiss()
                         finish()
                         startActivity(Intent(this@SettingActivity, MainActivity::class.java))
-                    }, content = "是否退出登录"))
-                    .show()
+                    })
+            XPopup.Builder(this@SettingActivity).asCustom(customPopup).show()
         }
     }
 

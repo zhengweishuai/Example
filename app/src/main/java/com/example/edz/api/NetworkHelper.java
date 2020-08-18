@@ -1,7 +1,7 @@
 package com.example.edz.api;
 
 import com.constant.AppConfigs;
-import com.network.BaseNetwork;
+import com.kthttp.BaseNetwork;
 
 import java.io.File;
 import java.io.IOException;

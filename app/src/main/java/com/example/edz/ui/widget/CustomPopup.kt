@@ -4,7 +4,10 @@ import android.content.Context
 import android.text.TextUtils
 import android.view.View
 import com.example.edz.R
-import com.lxj.xpopup.core.CenterPopupView
+import com.lxj.xpopup.animator.PopupAnimator
+import com.lxj.xpopup.animator.ScaleAlphaAnimator
+import com.lxj.xpopup.core.BasePopupView
+import com.lxj.xpopup.enums.PopupAnimation
 import kotlinx.android.synthetic.main.layout_popup_custom.view.*
 
 /**
@@ -13,34 +16,50 @@ import kotlinx.android.synthetic.main.layout_popup_custom.view.*
  * e-mail : zhengws@chinacarbon-al.com
  * description ：公共提示弹窗
  */
-class CustomPopup(context: Context,
-                  val leftClickListener: (CustomPopup) -> Unit,
-                  val rightClickListener: (CustomPopup) -> Unit,
-                  var title: String = "提示",
-                  var content: String = "",
-                  var left: String = "取消",
-                  var right: String = "确定") : CenterPopupView(context) {
+class CustomPopup(context: Context): BasePopupView(context) {
 
-    override fun getImplLayoutId(): Int = R.layout.layout_popup_custom
+    override fun getPopupLayoutId(): Int = R.layout.layout_popup_custom
 
-    override fun onCreate() {
-        super.onCreate()
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        translationY = 0f
+    }
+
+    override fun getPopupAnimator(): PopupAnimator? {
+        return ScaleAlphaAnimator(popupContentView, PopupAnimation.ScaleAlphaFromCenter)
+    }
+
+    fun setTitle(title: String): CustomPopup {
+        popup_title.visibility = if (TextUtils.isEmpty(title)) View.GONE else View.VISIBLE
         popup_title.text = title
+        return this
+    }
+
+    fun setContent(content: String): CustomPopup {
+        popup_content.visibility = if (TextUtils.isEmpty(content)) View.GONE else View.VISIBLE
         popup_content.text = content
+        return this
+    }
+
+    fun setLeftBtn(left: String, leftClickListener: (CustomPopup) -> Unit): CustomPopup {
+        popup_left.visibility = if (TextUtils.isEmpty(left)) View.GONE else View.VISIBLE
         popup_left.text = left
-        popup_right.text = right
-        if (TextUtils.isEmpty(left)){
-            popup_left.visibility = View.GONE
-            v_line.visibility = View.GONE
-        }
         popup_left.setOnClickListener {
             leftClickListener(this)
             dismiss()
         }
+        return this
+    }
+
+
+    fun setRightBtn(right: String, rightClickListener: (CustomPopup) -> Unit): CustomPopup {
+        popup_right.visibility = if (TextUtils.isEmpty(right)) View.GONE else View.VISIBLE
+        popup_right.text = right
         popup_right.setOnClickListener {
             rightClickListener(this)
             dismiss()
         }
+        return this
     }
 
 }

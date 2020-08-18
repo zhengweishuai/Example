@@ -1,7 +1,7 @@
 package com.example.edz.api
 
 import com.example.edz.bean.*
-import com.network.INetResponse
+import com.kthttp.INetResponse
 import retrofit2.http.*
 
 /**

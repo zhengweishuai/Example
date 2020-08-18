@@ -1,8 +1,8 @@
 package com.mvvm.vm
 
 import androidx.lifecycle.viewModelScope
-import com.network.INetResponse
-import com.network.NeworkConstant
+import com.kthttp.INetResponse
+import com.kthttp.NeworkConstant
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
