@@ -1,20 +1,20 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin:'kotlin-android-extensions'
+apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 android {
     def API_HOST_PRODUCT = "\"https://api.pinlaninfo.com/\""
     def API_HOST_DEVELOP = "\"http:192.168.3.125:9024/\""
-    dataBinding{
+    dataBinding {
         enabled = true
     }
 
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdkVersion AndroidVersion.compileSdkVersion
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode rootProject.ext.versionCode
-        versionName rootProject.ext.versionName
+        minSdkVersion AndroidVersion.minSdkVersion
+        targetSdkVersion AndroidVersion.targetSdkVersion
+        versionCode AndroidVersion.versionCode
+        versionName AndroidVersion.versionName
         multiDexEnabled true
         javaCompileOptions {
             annotationProcessorOptions {
@@ -23,7 +23,7 @@ android {
         }
         ndk {
             //设置支持的SO库架构（开发者可以根据需要，选择一个或多个平台的so）
-            abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "x86","x86_64"
+            abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
         }
     }
     compileOptions {
@@ -52,7 +52,7 @@ android {
             shrinkResources true // 移除无用的resource文件
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField ("String", "API_HOST", "${API_HOST_PRODUCT}")
+            buildConfigField("String", "API_HOST", "${API_HOST_PRODUCT}")
         }
         debug {
             minifyEnabled false
@@ -60,7 +60,7 @@ android {
             shrinkResources false  // 移除无用的resource文件
             signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField ("String", "API_HOST", "${API_HOST_DEVELOP}")
+            buildConfigField("String", "API_HOST", "${API_HOST_DEVELOP}")
         }
     }
 }
@@ -68,16 +68,9 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':base')
-    implementation "androidx.constraintlayout:constraintlayout:$rootProject.ext.constraintlayout"
-    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknife"
+    implementation LibDeps.constraintlayout
     //导航插件
-    implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
-    implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
-    implementation "me.jessyan:autosize:$rootProject.autoSize"
-    //检测内存泄露
-//    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.2'
-//    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
-//    // Optional, if you use support library fragments:
-//    debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.3'
-
+    implementation LibDeps.navigationFragmentKts
+    implementation LibDeps.navigationUiKts
+    implementation LibDeps.autosize
 }
