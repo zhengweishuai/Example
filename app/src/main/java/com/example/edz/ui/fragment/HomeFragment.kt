@@ -20,7 +20,6 @@ import com.lxj.xpopup.enums.PopupPosition
 import com.mvvm.BaseMvvmFragment
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
-import com.utils.LogUtil
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.layout_base_title.*
 

@@ -3,4 +3,7 @@
     <string name="register_title">注册</string>
     <string name="login_title">登录</string>
     <string name="home_input_author_search">输入作者搜索文章</string>
+    <string name="regist_input_name">请输入用户名</string>
+    <string name="regist_input_pwd">请输入密码</string>
+    <string name="regist_input_pwd_again">请确认密码</string>
 </resources>

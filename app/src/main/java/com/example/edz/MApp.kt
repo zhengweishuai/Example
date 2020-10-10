@@ -2,10 +2,10 @@ package com.example.edz
 
 import android.app.Activity
 import android.app.Application
+import com.blankj.utilcode.util.LogUtils
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.MaterialHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
-import com.utils.LogUtil
 import com.utils.SPUtils
 import com.widget.toast.ToastUtils
 import me.jessyan.autosize.AutoSizeConfig
@@ -24,7 +24,7 @@ class MApp : Application() {
         //toast
         ToastUtils.init(this)
         //log
-        LogUtil.init(true, packageName)
+        LogUtils.getConfig().globalTag = "WAZ-->"
         //屏幕适配
         initAutoSize()
 //        if (LeakCanary.isInAnalyzerProcess(this)) {

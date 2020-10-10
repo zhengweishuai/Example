@@ -5,6 +5,7 @@ import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import androidx.lifecycle.Observer
+import com.blankj.utilcode.util.KeyboardUtils
 import com.example.edz.R
 import com.example.edz.databinding.ActivityRegisterBinding
 import com.example.edz.viewmodel.RegisterViewModel
@@ -48,6 +49,7 @@ class RegisterActivity : BaseMvvmActivity<RegisterViewModel, ActivityRegisterBin
 
     inner class ProxyClick() {
         fun toRegister() {
+            KeyboardUtils.hideSoftInput(this@RegisterActivity)
             if (!TextUtils.isEmpty(ed_name.text.toString())
                     && !TextUtils.isEmpty(ed_pwd.text.toString())
                     && TextUtils.equals(ed_pwd.text.toString(), ed_pwd_again.text.toString())) {

@@ -14,7 +14,6 @@ import com.example.edz.R
 import com.example.edz.bean.BannerBean
 import com.example.edz.ui.adapter.HomeBannerAdapter
 import com.example.edz.utils.FixedSpeedScroller
-import com.utils.LogUtil
 import kotlinx.android.synthetic.main.layout_banner.view.*
 
 /**

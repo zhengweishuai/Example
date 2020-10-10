@@ -39,7 +39,6 @@ dependencies {
     api LibDeps.butterknife
     api LibDeps.appcompat
     api LibDeps.glide
-    api LibDeps.logger
     api LibDeps.retrofit
     api LibDeps.gson
     api LibDeps.rxjava
@@ -52,12 +51,8 @@ dependencies {
     api LibDeps.coroutines
     api LibDeps.coroutinesAndroid
     api LibDeps.coroutinesAdapter
-    implementation LibDeps.immersionbar
+    api LibDeps.immersionbar
     api LibDeps.immersionbarKtx
-    api LibDeps.refresh
-    api LibDeps.refreshHeader
-    api LibDeps.refreshFooter
     api LibDeps.xpopup
-    api LibDeps.qmui
-    api LibDeps.banner
+    api LibDeps.CommonUtils
 }

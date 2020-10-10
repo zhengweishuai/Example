@@ -32,6 +32,7 @@
             android:background="@drawable/login_shape_edit_selected"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
+            android:hint="@string/regist_input_name"
             app:layout_constraintTop_toBottomOf="@+id/title_layout"
             tools:ignore="MissingConstraints" />
 
@@ -42,7 +43,8 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="30dp"
             android:layout_marginRight="30dp"
-            android:inputType="number"
+            android:inputType="textPassword"
+            android:hint="@string/regist_input_pwd"
             android:background="@drawable/login_shape_edit_selected"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
@@ -56,7 +58,8 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="30dp"
             android:layout_marginRight="30dp"
-            android:inputType="number"
+            android:inputType="textPassword"
+            android:hint="@string/regist_input_pwd_again"
             android:background="@drawable/login_shape_edit_selected"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"

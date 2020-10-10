@@ -82,4 +82,7 @@ object LibDeps {
 
     //黄油到
     const val butterknife = "com.jakewharton:butterknife:${VersionDeps.butterknife}"
+
+    //utils
+    const val CommonUtils = "com.blankj:utilcodex:1.29.0"
 }

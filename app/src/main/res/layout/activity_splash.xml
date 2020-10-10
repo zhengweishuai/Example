@@ -38,7 +38,7 @@
                 android:button="@null"
                 android:drawableTop="@drawable/main_selector_navi_home"
                 android:gravity="center"
-                android:text="首页"
+                android:text="推荐"
                 android:textColor="@color/color_666666" />
 
             <RadioButton

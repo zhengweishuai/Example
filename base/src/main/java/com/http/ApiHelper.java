@@ -3,6 +3,7 @@ package com.http;
 import android.content.Context;
 
 import com.base.BuildConfig;
+import com.constant.AppConfigs;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.util.concurrent.TimeUnit;
@@ -40,7 +41,7 @@ public class ApiHelper {
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .baseUrl("http://happy.52rongshu.com:10000/")
+                .baseUrl(AppConfigs.base_url)
                 .build();
         iApi = retrofit.create(IApi.class);
     }

@@ -1,6 +1,6 @@
 package com.kthttp
 
-import com.utils.LogUtil
+import com.blankj.utilcode.util.LogUtils
 import okhttp3.Interceptor
 import okhttp3.Response
 import okhttp3.ResponseBody
@@ -14,13 +14,13 @@ import okhttp3.ResponseBody
 class LogInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
-        LogUtil.d(request.toString())
+        LogUtils.d(request.toString())
         val response = chain.proceed(chain.request())
         val content = response.body()?.string()
-        LogUtil.json(content)
+        LogUtils.json(content)
         val mediaType = response.body()!!.contentType()
         return response.newBuilder()
-                .body(ResponseBody.create(mediaType, content))
+                .body(ResponseBody.create(mediaType, content ?: ""))
                 .build()
     }
 }

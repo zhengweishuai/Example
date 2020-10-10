@@ -10,9 +10,9 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.blankj.utilcode.util.LogUtils
 import com.mvvm.vm.BaseViewModel
 import com.mvvm.vm.ViewModelConstant
-import com.utils.LogUtil
 import com.utils.getClazz
 
 /**
@@ -57,11 +57,11 @@ abstract class BaseMvvmFragment<vm : BaseViewModel, db : ViewDataBinding> : Frag
             val activity: BaseMvvmActivity<*, *> = requireActivity() as BaseMvvmActivity<*, *>
             when (it.action) {
                 ViewModelConstant.ACTION_SHOW_LOADING -> {
-                    LogUtil.d("显示loading")
+                    LogUtils.d("显示loading")
                     activity.showLoading(true)
                 }
                 ViewModelConstant.ACTION_HIDE_LOADING -> {
-                    LogUtil.d("隐藏loading")
+                    LogUtils.d("隐藏loading")
                     activity.showLoading(false)
                 }
                 ViewModelConstant.ACTION_SHOW_TOAST -> {
@@ -103,7 +103,7 @@ abstract class BaseMvvmFragment<vm : BaseViewModel, db : ViewDataBinding> : Frag
     }
 
     override fun onDestroy() {
-        LogUtil.d("------------------>onDestroy" + this.javaClass.simpleName)
+        LogUtils.d("------------------>onDestroy" + this.javaClass.simpleName)
         super.onDestroy()
     }
 }

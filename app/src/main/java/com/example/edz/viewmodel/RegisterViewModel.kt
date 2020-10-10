@@ -5,7 +5,6 @@ import com.example.edz.api.NetworkHelper
 import com.example.edz.bean.UserBean
 import com.mvvm.vm.BaseViewModel
 import com.mvvm.vm.request
-import com.utils.LogUtil
 
 /**
  * author : zhengweishuai
@@ -26,7 +25,6 @@ class RegisterViewModel() : BaseViewModel() {
         }, {
             inetResponse.postValue(it)
         }, {
-            LogUtil.d(it.toString())
-        })
+        }, showToast = true)
     }
 }
